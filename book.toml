@@ -1,0 +1,11 @@
+[book]
+authors = ["Freddie Haddad"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Fast Track to Rust"
+description = "A course designed to get you going in Rust fast!"
+
+[output.html.playground]
+editable = true
+line-numbers = true
