@@ -159,7 +159,7 @@ In this section, we:
 - Explored `for` loop expressions.
 - Examined `match` expressions.
 - Learned how the Rust compiler provides helpful error messages.
-- Were introduced to the empty unit type `()`. jjj
+- Were introduced to the empty unit type `()`.
 
 # Exercise
 
