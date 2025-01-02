@@ -6,6 +6,12 @@ minimal subset of the features found in the [GNU] [^1] [grep] [^2] utility. This
 means we'll start with what we know and iterate upon the design as we learn more
 about the language.
 
+> The official URL for this online course is:
+> **[https://freddiehaddad.github.io/fast-track-to-rust/](https://freddiehaddad.github.io/fast-track-to-rust/)**.
+>
+> The source code can be found at:
+> **[https://github.com/freddiehaddad/fast-track-to-rust](https://github.com/freddiehaddad/fast-track-to-rust)**.
+
 The goal is to teach you Rust, so it's assumed you don't know anything about the
 language. However, it's also assumed that you have experience programming in
 other languages like C++, and are familiar with multithreading, data structures,
