@@ -10,9 +10,17 @@ development of a grep-like program.
 The course is aimed towards experienced software engineers with a background in
 statically typed languages such as C++.
 
-## Compiling
+## Building
 
-This course was built using [mdbook](https://github.com/rust-lang/mdBook).
+This course was built using [mdbook].
+
+1. Prepare your environment by following the instructions on the [Rust
+   installation page].
+1. Install [mdbook] by Following the instructions on the [Build from source
+   using Rust] page.
+1. Clone this repository.
+1. Build with `mdbook build`.
+1. Serve locally with `mdbook serve --open`.
 
 ## Contributing
 
@@ -20,4 +28,11 @@ Contributions are welcome. Simply open a PR!
 
 ## Contact
 
-For questions or comments, please start a discussion on GitHub.
+For questions or comments, please start a [discussion on GitHub].
+
+[mdbook]: https://github.com/rust-lang/mdBook
+[Rust installation page]: https://www.rust-lang.org/tools/install
+[Build from source using Rust]:
+  https://rust-lang.github.io/mdBook/guide/installation.html#build-from-source-using-rust
+[discussion on GitHub]:
+  https://github.com/freddiehaddad/fast-track-to-rust/discussions
