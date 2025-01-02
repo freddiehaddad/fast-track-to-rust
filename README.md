@@ -5,6 +5,8 @@ course, created by Freddie Haddad. The course explores a wide array of topics in
 the Rust programming language, gradually introducing them through the
 development of a grep-like program.
 
+Read the course at **https://freddiehaddad.github.io/fast-track-to-rust/**.
+
 ## Target Audience
 
 The course is aimed towards experienced software engineers with a background in
