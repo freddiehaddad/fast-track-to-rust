@@ -6,6 +6,10 @@ src = "src"
 title = "Fast Track to Rust"
 description = "A course designed to get you going in Rust fast!"
 
+[output.html]
+git-repository-url = "https://github.com/freddiehaddad/fast-track-to-rust"
+git-repository-icon = "fa-github"
+
 [output.html.playground]
 editable = true
 line-numbers = true
