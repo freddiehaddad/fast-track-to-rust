@@ -1,6 +1,6 @@
 # Summary
 
-[Introduction](README.md) [Shortcuts](shortcuts.md)
+[Introduction](introduction.md) [Shortcuts](shortcuts.md)
 [Installation](installation.md) [Rust Playground](rust_playground.md)
 
 - [Using Cargo](using_cargo.md)
