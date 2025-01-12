@@ -1,8 +1,9 @@
 # Summary
 
-[Introduction](introduction.md) [Shortcuts](shortcuts.md)
-[Installation](installation.md) [Rust Playground](rust_playground.md)
-
+- [Introduction](introduction.md)
+  - [Shortcuts](shortcuts.md)
+  - [Installation](installation.md)
+  - [Rust Playground](rust_playground.md)
 - [Using Cargo](using_cargo.md)
   - [Package Creation](package_creation.md)
   - [Boilerplate](boilerplate.md)
