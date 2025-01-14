@@ -1,13 +1,13 @@
 # Scoped Threads
 
-In the previous section, we examined the `spawn` method in the `thread` module
-and discussed how it cannot borrow non-`'static` data because the compiler
-cannot ensure that all threads will be joined before the lifetimes of any
-borrowed values end. To overcome this limitation, the thread module also
-provides the [`scope` function], which utilizes [`Scope`]. Together, they allow
-for the borrowing of non-`'static` data by ensuring that all spawned threads
-within the scope are automatically joined before the function in which they were
-created returns, unless they have been manually joined.
+In the previous section, we explored the `spawn` method in the `thread` module
+and noted its limitation: it cannot borrow non-`'static` data because the
+compiler cannot guarantee that all threads will be joined before the lifetimes
+of any borrowed values expire. To address this issue, the `thread` module also
+offers the [`scope` function], which works in conjunction with [`Scope`]. This
+combination allows for borrowing non-`'static` data by ensuring that all spawned
+threads within the scope are automatically joined before the function in which
+they were created returns, unless they were manually joined earlier.
 
 ## The `scope` Function
 
@@ -25,7 +25,7 @@ spawned using the [`spawn`] method. The spawn method returns a
 [`ScopedJoinHandle`], which, as the name suggests, provides a [`join`] method to
 wait for the spawned thread to complete.
 
-Scoped threads involve two lifetimes: `'scope` and `'env`.
+Scoped threads involve two lifetimes: `'scope` and `'env`:
 
 - `'env`: This is a lifetime parameter that represents the lifetime of the
   environment data that the `Scope` can borrow (meaning the data from outside

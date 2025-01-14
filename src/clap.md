@@ -56,26 +56,35 @@ Options:
 Here's the updated version of grep with command line argument support added:
 
 ````rust
-# #![allow(unused)]
-# extern crate clap; // this is needed for the playground
-# extern crate itertools; // this is needed for the playground
+# #![allow(unused_imports)]
 # extern crate regex; // this is needed for the playground
-use clap::{Parser, Subcommand};
+use clap::Parser;
 # use interval::{Interval, IntervalError};
 # use itertools::Itertools;
 # use regex::Regex;
 # use std::fs::File;
-# use std::io::{BufRead, BufReader, Read};
+# use std::io::Read;
+# use std::io::{BufRead, BufReader};
 use std::path::PathBuf;
 # use std::process::exit;
 #
+# fn find_matching_lines(lines: &[String], regex: Regex) -> Vec<usize> {
+#     lines
+#         .iter()
+#         .enumerate()
+#         .filter_map(|(i, line)| match regex.is_match(line) {
+#             true => Some(i),
+#             false => None,
+#         })
+#         .collect() // turns anything iterable into a collection
+# }
+#
 # fn create_intervals(
+#     lines: Vec<usize>,
 #     before_context: usize,
 #     after_context: usize,
-#     match_lines: Vec<usize>,
-#     lines: &[String],
 # ) -> Result<Vec<Interval<usize>>, IntervalError> {
-#     match_lines
+#     lines
 #         .iter()
 #         .map(|line| {
 #             let start = line.saturating_sub(before_context);
@@ -86,16 +95,17 @@ use std::path::PathBuf;
 # }
 #
 # fn merge_intervals(intervals: Vec<Interval<usize>>) -> Vec<Interval<usize>> {
+#     // merge overlapping intervals
 #     intervals
 #         .into_iter()
-#         .coalesce(|p, c| p.merge(&c).or(Err((p, c))))
+#         .coalesce(|p, c| p.merge(&c).map_err(|_| (p, c)))
 #         .collect()
 # }
 
-fn print_matches(
+fn print_results(
     intervals: Vec<Interval<usize>>,
-    line_numbers: bool,
-    lines: &[String],
+    lines: Vec<String>,
+    line_number: bool,
 ) {
     for interval in intervals {
         for (line_no, line) in lines
@@ -104,7 +114,7 @@ fn print_matches(
             .take(interval.end + 1)
             .skip(interval.start)
         {
-            if line_numbers {
+            if line_number {
                 print!("{}: ", line_no + 1);
             }
             println!("{}", line);
@@ -142,26 +152,6 @@ struct Cli {
 }
 
 fn main() {
-    // let cli = Cli::parse(); // Use this version for production.
-    // mock command line arguments
-    let cli = match Cli::try_parse_from([
-        "grep", // executable name
-        "--line-number",
-        "--before-context",
-        "1",
-        "--after-context",
-        "1",
-        "little",   // pattern
-        "poem.txt", // file
-    ]) {
-        Ok(cli) => cli,
-        Err(e) => {
-            eprintln!("Error parsing command line arguments: {e:?}");
-            exit(1);
-        }
-    };
-#
-#     // let filename = "poem.txt";
 #     let poem = "I have a little shadow that goes in and out with me,
 #                 And what can be the use of him is more than I can see.
 #                 He is very, very like me from the heels up to the head;
@@ -173,25 +163,45 @@ fn main() {
 #                 And he sometimes gets so little that there’s none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
-#     let lines = read_file(mock_file);
+#
+    // let cli = Cli::parse(); // for production use
+    // mock command line arguments
+    let cli = match Cli::try_parse_from([
+        "grep", // executable name
+        "--line-number",
+        "--before-context",
+        "1",
+        "--after-context",
+        "1",
+        "(all)|(little)", // pattern
+        "poem.txt",       // file
+    ]) {
+        Ok(cli) => cli,
+        Err(e) => {
+            eprintln!("Error parsing command line arguments: {e:?}");
+            exit(1);
+        }
+    };
 
-    // get values from command line arguments
-    let line_numbers = cli.line_number;
-    let pattern = &cli.pattern;
+    // get values from clap
+    let pattern = cli.pattern;
+    let line_number = cli.line_number;
     let before_context = cli.before_context as usize;
     let after_context = cli.after_context as usize;
 #
-#     // // attempt to open the file
-#     // let lines = match File::open(filename) {
-#     //     Ok(file) => read_file(file),
-#     //     Err(e) => {
-#     //         eprintln!("Error opening {filename}: {e}");
-#     //         exit(1);
-#     //     }
-#     // };
+#     // attempt to open the file
+#     let lines = read_file(mock_file);
+#     //let lines = match File::open(filename) {
+#     //    // convert the poem into lines
+#     //    Ok(file) => read_file(file),
+#     //    Err(e) => {
+#     //        eprintln!("Error opening {filename}: {e}");
+#     //        exit(1);
+#     //    }
+#     //};
 #
 #     // compile the regular expression
-#     let regex = match Regex::new(pattern) {
+#     let regex = match Regex::new(&pattern) {
 #         Ok(re) => re, // bind re to regex
 #         Err(e) => {
 #             eprintln!("{e}"); // write to standard error
@@ -200,37 +210,23 @@ fn main() {
 #     };
 #
 #     // store the 0-based line number for any matched line
-#     let match_lines: Vec<_> = lines
-#         .iter()
-#         .enumerate()
-#         .filter_map(|(i, line)| match regex.is_match(line) {
-#             true => Some(i),
-#             false => None,
-#         })
-#         .collect(); // turns anything iterable into a collection
-#
-#     // exit early if no matches were found
-#     if match_lines.is_empty() {
-#         return;
-#     }
+#     let match_lines = find_matching_lines(&lines, regex);
 #
 #     // create intervals of the form [a,b] with the before/after context
-#     let intervals = match create_intervals(
-#         before_context,
-#         after_context,
-#         match_lines,
-#         &lines,
-#     ) {
-#         Ok(intervals) => intervals,
-#         Err(_) => {
-#             eprintln!("An error occurred while creating intervals");
-#             exit(1);
-#         }
-#     };
+#     let intervals =
+#         match create_intervals(match_lines, before_context, after_context) {
+#             Ok(intervals) => intervals,
+#             Err(_) => {
+#                 eprintln!("An error occurred while creating intervals");
+#                 exit(1);
+#             }
+#         };
 #
+#     // merge overlapping intervals
 #     let intervals = merge_intervals(intervals);
 
-    print_matches(intervals, line_numbers, &lines);
+    // print the lines
+    print_results(intervals, lines, line_number);
 }
 #
 # pub mod interval {
@@ -259,28 +255,6 @@ fn main() {
 #     pub struct Interval<T> {
 #         pub start: T,
 #         pub end: T,
-#     }
-#
-#     use std::fmt;
-#     impl<T: fmt::Display> fmt::Display for Interval<T> {
-#         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> fmt::Result {
-#             write!(f, "[{}, {}]", self.start, self.end)
-#         }
-#     }
-#
-#     use std::cmp::Ordering;
-#     impl<T: PartialEq + PartialOrd> PartialOrd for Interval<T> {
-#         fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-#             if self == other {
-#                 Some(Ordering::Equal)
-#             } else if self.end < other.start {
-#                 Some(Ordering::Less)
-#             } else if self.start > other.end {
-#                 Some(Ordering::Greater)
-#             } else {
-#                 None // Intervals overlap
-#             }
-#         }
 #     }
 #
 #     impl<T: Copy + PartialOrd> Interval<T> {
@@ -355,6 +329,28 @@ fn main() {
 #             }
 #         }
 #     }
+#
+#     use std::fmt;
+#     impl<T: fmt::Display> fmt::Display for Interval<T> {
+#         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> fmt::Result {
+#             write!(f, "[{}, {}]", self.start, self.end)
+#         }
+#     }
+#
+#     use std::cmp::Ordering;
+#     impl<T: PartialEq + PartialOrd> PartialOrd for Interval<T> {
+#         fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+#             if self == other {
+#                 Some(Ordering::Equal)
+#             } else if self.end < other.start {
+#                 Some(Ordering::Less)
+#             } else if self.start > other.end {
+#                 Some(Ordering::Greater)
+#             } else {
+#                 None // Intervals overlap
+#             }
+#         }
+#     }
 # }
 ````
 
@@ -366,17 +362,19 @@ be straightforward by now, so we'll focus on the new aspects:
 - The [`PathBuf`] module facilitates cross-platform path manipulation. Since our
   grep program requires files to search, it's better to use `PathBuf` for
   handling that input.
-- We updated `print_matches` to take a new boolean argument, `line_numbers`,
-  which specifies whether or not to print line numbers in the output.
+- We updated `print_results` to take a new boolean argument, `line_number`,
+  which specifies whether or not to print line numbers in the output. If `true`,
+  the `print!` macro is used to output the line number without emitting a
+  newline.
 - We used `clap` attributes to derive our command line arguments. The `clap`
   [documentation] covers these attributes in full detail.
 - In `main`, we mock command line arguments with an array of string slices that
   gets parsed by `clap`.
   > The `match` expression is for development purposes. If we made any mistakes
   > in our mock command line arguments, we would catch the error and print it.
-- Since we defined the before- and after-context variables as `u8` in the `Cli`
-  structure but use `usize` throughout the code, an explicit cast using [`as`]
-  is necessary when assigning these values to local variables.
+- Since we defined the `before_context` and `after_context` variables as `u8` in
+  the `Cli` structure but use `usize` throughout the code, an explicit cast
+  using [`as`] is necessary when assigning these values to local variables.
 
 # Next
 

@@ -54,10 +54,10 @@ fn merge(&self, other: &Self) -> Result<Self, IntervalError> {
 }
 ```
 
-Observe how an `Interval` is created in `new` as opposed to `merge`. Since the
-parameter names in new precisely match the fields in the `Interval` `struct`
-definition, you can omit the field specifiers. This technique is referred to as
-_field init shorthand_ syntax. [^2]
+> Observe how an `Interval` is created in `new` as opposed to `merge`. Since the
+> parameter names in new precisely match the fields in the `Interval` `struct`
+> definition, you can omit the field specifiers. This technique is referred to
+> as _field init shorthand_ syntax. [^2]
 
 ## Updating Grep
 
@@ -67,12 +67,11 @@ return type.
 
 ```rust,noplayground
 fn create_intervals(
+    lines: Vec<usize>,
     before_context: usize,
     after_context: usize,
-    match_lines: Vec<usize>,
-    lines: &[String],
 ) -> Result<Vec<Interval>, IntervalError> {
-    match_lines
+    lines
         .iter()
         .map(|line| {
             let start = line.saturating_sub(before_context);
@@ -99,6 +98,7 @@ the `Vec<Interval>` collection which is then wrapped in a `Result`.
 
 ```rust,noplayground
 fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
+    // merge overlapping intervals
     intervals
         .into_iter()
         .coalesce(|p, c| p.merge(&c).or(Err((p, c))))
@@ -132,18 +132,14 @@ exit.
 
 ```rust,noplayground
 // create intervals of the form [a,b] with the before/after context
-let intervals = match create_intervals(
-    before_context,
-    after_context,
-    match_lines,
-    &lines,
-) {
-    Ok(intervals) => intervals,
-    Err(_) => {
-        eprintln!("An error occurred while creating intervals");
-        exit(1);
-    }
-};
+let intervals =
+    match create_intervals(match_lines, before_context, after_context) {
+        Ok(intervals) => intervals,
+        Err(_) => {
+            eprintln!("An error occurred while creating intervals");
+            exit(1);
+        }
+    };
 ```
 
 # Updating Grep
@@ -152,21 +148,32 @@ With our changes in place, our Interval now supports error handling via `Result`
 and our grep program properly handles any errors.
 
 ```rust
-# extern crate itertools; // this is needed for the playground
+# #![allow(unused_imports)]
 # extern crate regex; // this is needed for the playground
 # use itertools::Itertools;
 # use regex::Regex;
 # use std::fs::File;
-# use std::io::{BufRead, BufReader, Read};
+# use std::io::Read;
+# use std::io::{BufRead, BufReader};
 # use std::process::exit;
 #
+# fn find_matching_lines(lines: &[String], regex: Regex) -> Vec<usize> {
+#     lines
+#         .iter()
+#         .enumerate()
+#         .filter_map(|(i, line)| match regex.is_match(line) {
+#             true => Some(i),
+#             false => None,
+#         })
+#         .collect() // turns anything iterable into a collection
+# }
+#
 fn create_intervals(
+    lines: Vec<usize>,
     before_context: usize,
     after_context: usize,
-    match_lines: Vec<usize>,
-    lines: &[String],
 ) -> Result<Vec<Interval>, IntervalError> {
-    match_lines
+    lines
         .iter()
         .map(|line| {
             let start = line.saturating_sub(before_context);
@@ -177,13 +184,14 @@ fn create_intervals(
 }
 
 fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
+    // merge overlapping intervals
     intervals
         .into_iter()
         .coalesce(|p, c| p.merge(&c).or(Err((p, c))))
         .collect()
 }
-#
-# fn print_matches(intervals: Vec<Interval>, lines: &[String]) {
+
+# fn print_results(intervals: Vec<Interval>, lines: Vec<String>) {
 #     for interval in intervals {
 #         for (line_no, line) in lines
 #             .iter()
@@ -200,8 +208,7 @@ fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
 #     BufReader::new(file).lines().map_while(Result::ok).collect()
 # }
 #
-# fn main() {
-#     // let filename = "poem.txt";
+fn main() {
 #     let poem = "I have a little shadow that goes in and out with me,
 #                 And what can be the use of him is more than I can see.
 #                 He is very, very like me from the heels up to the head;
@@ -213,20 +220,22 @@ fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
 #                 And he sometimes gets so little that there’s none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
-#     let lines = read_file(mock_file);
 #
-#     let pattern = "little";
+#     // command line arguments
+#     let pattern = "(all)|(little)";
 #     let before_context = 1;
 #     let after_context = 1;
 #
-#     // // attempt to open the file
-#     // let lines = match File::open(filename) {
-#     //     Ok(file) => read_file(file),
-#     //     Err(e) => {
-#     //         eprintln!("Error opening {filename}: {e}");
-#     //         exit(1);
-#     //     }
-#     // };
+#     // attempt to open the file
+#     let lines = read_file(mock_file);
+#     //let lines = match File::open(filename) {
+#     //    // convert the poem into lines
+#     //    Ok(file) => read_file(file),
+#     //    Err(e) => {
+#     //        eprintln!("Error opening {filename}: {e}");
+#     //        exit(1);
+#     //    }
+#     //};
 #
 #     // compile the regular expression
 #     let regex = match Regex::new(pattern) {
@@ -238,48 +247,34 @@ fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
 #     };
 #
 #     // store the 0-based line number for any matched line
-#     let match_lines: Vec<_> = lines
-#         .iter()
-#         .enumerate()
-#         .filter_map(|(i, line)| match regex.is_match(line) {
-#             true => Some(i),
-#             false => None,
-#         })
-#         .collect(); // turns anything iterable into a collection
-#
-#     // exit early if no matches were found
-#     if match_lines.is_empty() {
-#         return;
-#     }
+#     let match_lines = find_matching_lines(&lines, regex);
 #
     // create intervals of the form [a,b] with the before/after context
-    let intervals = match create_intervals(
-        before_context,
-        after_context,
-        match_lines,
-        &lines,
-    ) {
-        Ok(intervals) => intervals,
-        Err(_) => {
-            eprintln!("An error occurred while creating intervals");
-            exit(1);
-        }
-    };
+    let intervals =
+        match create_intervals(match_lines, before_context, after_context) {
+            Ok(intervals) => intervals,
+            Err(_) => {
+                eprintln!("An error occurred while creating intervals");
+                exit(1);
+            }
+        };
 #
+#     // merge overlapping intervals
 #     let intervals = merge_intervals(intervals);
 #
-#     print_matches(intervals, &lines);
+#     // print the lines
+#     print_results(intervals, lines);
 }
 
 enum IntervalError {
     StartEndRangeInvalid,
     NonOverlappingInterval,
 }
-#
-# struct Interval {
-#     start: usize,
-#     end: usize,
-# }
+
+struct Interval {
+    start: usize,
+    end: usize,
+}
 
 impl Interval {
     fn new(start: usize, end: usize) -> Result<Self, IntervalError> {
@@ -289,11 +284,11 @@ impl Interval {
             Err(IntervalError::StartEndRangeInvalid)
         }
     }
-#
-#     fn overlaps(&self, other: &Interval) -> bool {
-#         self.end >= other.start
-#     }
-#
+
+    fn overlaps(&self, other: &Interval) -> bool {
+        self.end >= other.start
+    }
+
     fn merge(&self, other: &Self) -> Result<Self, IntervalError> {
         if self.overlaps(other) {
             Ok(Self {
@@ -341,6 +336,7 @@ and performance, providing a clear and structured way to handle errors.
 
   ```rust,noplayground
   fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
+      // merge overlapping intervals
       intervals
           .into_iter()
           .coalesce(|p, c| p.merge(&c).map_err(|_| (p, c)))
@@ -351,21 +347,32 @@ and performance, providing a clear and structured way to handle errors.
 </details>
 
 ```rust,editable
-extern crate itertools; // this is needed for the playground
+#![allow(unused_imports)]
 extern crate regex; // this is needed for the playground
 use itertools::Itertools;
 use regex::Regex;
 use std::fs::File;
-use std::io::{BufRead, BufReader, Read};
+use std::io::Read;
+use std::io::{BufRead, BufReader};
 use std::process::exit;
 
+fn find_matching_lines(lines: &[String], regex: Regex) -> Vec<usize> {
+    lines
+        .iter()
+        .enumerate()
+        .filter_map(|(i, line)| match regex.is_match(line) {
+            true => Some(i),
+            false => None,
+        })
+        .collect() // turns anything iterable into a collection
+}
+
 fn create_intervals(
+    lines: Vec<usize>,
     before_context: usize,
     after_context: usize,
-    match_lines: Vec<usize>,
-    lines: &[String],
 ) -> Result<Vec<Interval>, IntervalError> {
-    match_lines
+    lines
         .iter()
         .map(|line| {
             let start = line.saturating_sub(before_context);
@@ -376,13 +383,14 @@ fn create_intervals(
 }
 
 fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
+    // merge overlapping intervals
     intervals
         .into_iter()
         .coalesce(|p, c| p.merge(&c).or(Err((p, c))))
         .collect()
 }
 
-fn print_matches(intervals: Vec<Interval>, lines: &[String]) {
+fn print_results(intervals: Vec<Interval>, lines: Vec<String>) {
     for interval in intervals {
         for (line_no, line) in lines
             .iter()
@@ -400,32 +408,33 @@ fn read_file(file: impl Read) -> Vec<String> {
 }
 
 fn main() {
-    // let filename = "poem.txt";
     let poem = "I have a little shadow that goes in and out with me,
-               And what can be the use of him is more than I can see.
-               He is very, very like me from the heels up to the head;
-               And I see him jump before me, when I jump into my bed.
+                And what can be the use of him is more than I can see.
+                He is very, very like me from the heels up to the head;
+                And I see him jump before me, when I jump into my bed.
 
-               The funniest thing about him is the way he likes to grow -
-               Not at all like proper children, which is always very slow;
-               For he sometimes shoots up taller like an india-rubber ball,
-               And he sometimes gets so little that there’s none of him at all.";
+                The funniest thing about him is the way he likes to grow -
+                Not at all like proper children, which is always very slow;
+                For he sometimes shoots up taller like an india-rubber ball,
+                And he sometimes gets so little that there’s none of him at all.";
 
     let mock_file = std::io::Cursor::new(poem);
-    let lines = read_file(mock_file);
 
-    let pattern = "little";
+    // command line arguments
+    let pattern = "(all)|(little)";
     let before_context = 1;
     let after_context = 1;
 
-    // // attempt to open the file
-    // let lines = match File::open(filename) {
-    //     Ok(file) => read_file(file),
-    //     Err(e) => {
-    //         eprintln!("Error opening {filename}: {e}");
-    //         exit(1);
-    //     }
-    // };
+    // attempt to open the file
+    let lines = read_file(mock_file);
+    //let lines = match File::open(filename) {
+    //    // convert the poem into lines
+    //    Ok(file) => read_file(file),
+    //    Err(e) => {
+    //        eprintln!("Error opening {filename}: {e}");
+    //        exit(1);
+    //    }
+    //};
 
     // compile the regular expression
     let regex = match Regex::new(pattern) {
@@ -437,37 +446,23 @@ fn main() {
     };
 
     // store the 0-based line number for any matched line
-    let match_lines: Vec<_> = lines
-        .iter()
-        .enumerate()
-        .filter_map(|(i, line)| match regex.is_match(line) {
-            true => Some(i),
-            false => None,
-        })
-        .collect(); // turns anything iterable into a collection
-
-    // exit early if no matches were found
-    if match_lines.is_empty() {
-        return;
-    }
+    let match_lines = find_matching_lines(&lines, regex);
 
     // create intervals of the form [a,b] with the before/after context
-    let intervals = match create_intervals(
-        before_context,
-        after_context,
-        match_lines,
-        &lines,
-    ) {
-        Ok(intervals) => intervals,
-        Err(_) => {
-            eprintln!("An error occurred while creating intervals");
-            exit(1);
-        }
-    };
+    let intervals =
+        match create_intervals(match_lines, before_context, after_context) {
+            Ok(intervals) => intervals,
+            Err(_) => {
+                eprintln!("An error occurred while creating intervals");
+                exit(1);
+            }
+        };
 
+    // merge overlapping intervals
     let intervals = merge_intervals(intervals);
 
-    print_matches(intervals, &lines);
+    // print the lines
+    print_results(intervals, lines);
 }
 
 enum IntervalError {

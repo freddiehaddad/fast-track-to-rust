@@ -3,57 +3,48 @@
 Currently, our entire grep program is contained within the `main` function. This
 approach was chosen to address the challenges of teaching a course in a way that
 introduces important concepts logically and in an easily digestible manner.
-However, the time has come to refactor some of the code from the main function
+However, the time has come to refactor some of the code from the `main` function
 into separate functions.
 
-Let's start by creating a function to handle the creation of our intervals. Here
-is the function signature:
+Let's start by creating a function to handle the work of finding all the lines
+in the input that contain the specified pattern. Here is the function signature:
 
 ```rust,noplayground
-fn create_intervals(
-    before_context: usize,
-    after_context: usize,
-    match_lines: Vec<usize>,
-    lines: Vec<&str>,
-) -> Vec<(usize, usize)>
+fn find_matching_lines(lines: Vec<&str>, pattern: &str) -> Vec<usize>
 ```
 
 This is the code that we'll transfer into the new function:
 
 ```rust,noplayground
-// create intervals of the form [a,b] with the before/after context
-let intervals: Vec<_> = match_lines
+// store the 0-based line number for any matched line
+let match_lines: Vec<_> = lines
     .iter()
-    .map(|line| {
-        (
-            line.saturating_sub(before_context),
-            line.saturating_add(after_context),
-        )
+    .enumerate()
+    .filter_map(|(i, line)| match line.contains(pattern) {
+        true => Some(i),
+        false => None,
     })
-    .collect();
+    .collect(); // turns anything iterable into a collection
 ```
 
 Here is the revised code with the changes implemented. Review it and run the
 code.
 
-```rust,editable
-use std::iter::FromIterator; // this line addresses a rust playground bug
-
-fn create_intervals(
-    before_context: usize,
-    after_context: usize,
-    match_lines: Vec<usize>,
-    lines: Vec<&str>,
-) -> Vec<(usize, usize)> {
-    match_lines
+```rust
+# use std::iter::FromIterator; // this line addresses a rust playground bug
+#
+fn find_matching_lines(lines: Vec<&str>, pattern: &str) -> Vec<usize> {
+    lines
         .iter()
-        .map(|line| {
-            (
-                line.saturating_sub(before_context),
-                line.saturating_add(after_context),
-            )
+        .enumerate()
+        .filter_map(|(i, line)| match line.contains(pattern) {
+            true => Some(i),
+            false => None,
         })
-        .collect()
+        .collect() // turns anything iterable into a collection
+        // The return keyword is unnecessary when the returned value is the
+        // final expression in a function. In this scenario, the semicolon (;)
+        // is omitted.
 }
 
 fn main() {
@@ -67,6 +58,7 @@ fn main() {
                 For he sometimes shoots up taller like an india-rubber ball,
                 And he sometimes gets so little that there’s none of him at all.";
 
+    // command line arguments
     let pattern = "all";
     let before_context = 1;
     let after_context = 1;
@@ -75,18 +67,18 @@ fn main() {
     let lines = Vec::from_iter(poem.lines());
 
     // store the 0-based line number for any matched line
-    let match_lines: Vec<_> = lines
-        .iter()
-        .enumerate()
-        .filter_map(|(i, line)| match line.contains(pattern) {
-            true => Some(i),
-            false => None,
-        })
-        .collect(); // turns anything iterable into a collection
+    let match_lines = find_matching_lines(lines, pattern);
 
     // create intervals of the form [a,b] with the before/after context
-    let mut intervals =
-        create_intervals(before_context, after_context, match_lines, lines);
+    let mut intervals: Vec<_> = match_lines
+        .iter()
+        .map(|line| {
+            (
+                line.saturating_sub(before_context),
+                line.saturating_add(after_context),
+            )
+        })
+        .collect();
 
     // merge overlapping intervals
     intervals.dedup_by(|next, prev| {
@@ -118,15 +110,19 @@ challenging. Let's break down the error and understand what went wrong. Here are
 the key details from the error message, cleaned up for readability:
 
 ```text
-let lines = Vec::from_iter(poem.lines());
-    ----- move occurs because `lines` has type `Vec<&str>`, which does not implement
-          the `Copy` trait
-
-create_intervals(before_context, after_context, match_lines, lines);
-                                                             ----- value moved here
-
-lines.iter().enumerate().take(end + 1).skip(start)
-^^^^^^^^^^^^ value borrowed here after move
+error[E0382]: borrow of moved value: `lines`
+    --> src/main.rs:63:13
+     |
+34   |     let lines = Vec::from_iter(poem.lines());
+     |         ----- move occurs because `lines` has type `Vec<&str>`, which
+     |               does not implement the `Copy` trait
+...
+37   |     let match_lines = find_matching_lines(lines, pattern);
+     |                                           ----- value moved here
+...
+63   |             lines.iter().enumerate().take(end + 1).skip(start)
+     |             ^^^^^^^^^^^^ value borrowed here after move
+     |
 ```
 
 ### Unpacking the Error
@@ -140,7 +136,7 @@ that when a type implements the [`Copy`] trait, its values are duplicated when
 assigned to a new variable. This means that after an assignment, both the
 original and the new variable can be used independently.
 
-The `lines` vector we passed to the `create_intervals` function does _not_
+The `lines` vector we passed to the `find_matching_lines` function does _not_
 implement the [`Copy`] trait.
 
 #### Value Moved

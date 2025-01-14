@@ -17,9 +17,9 @@ struct Interval {
 }
 ```
 
-## Defining Methods
+## Defining Behavior
 
-Methods are added by defining them inside an `impl` block:
+Functions and methods are added by defining them inside an `impl` block:
 
 ```rust,noplayground
 impl Interval {
@@ -47,10 +47,11 @@ impl Interval {
 > `Interval`. While the type can be explicitly stated, the common convention is
 > to use `Self`.
 
-> Exclusion of the <code>return</code> keyword and <code>;</code>
+> Exclusion of the `return` keyword and (`;`)
 >
-> `return` is not needed when the returned value is the last expression in a
-> function. In this case the `;` is omitted.[^2]
+> The `return` keyword is unnecessary when the returned value is the final
+> expression in a function. In this scenario, the semicolon (`;`) is omitted.
+> [^2]
 
 ## Methods
 
@@ -189,21 +190,32 @@ additional language features, and leverage move semantics. Give the program a
 run!
 
 ```rust
-# extern crate itertools; // this is needed for the playground
+# #![allow(unused_imports)]
 # extern crate regex; // this is needed for the playground
 use itertools::Itertools;
 # use regex::Regex;
 # use std::fs::File;
-# use std::io::{BufRead, BufReader, Read};
+# use std::io::Read;
+# use std::io::{BufRead, BufReader};
 # use std::process::exit;
+#
+# fn find_matching_lines(lines: &[String], regex: Regex) -> Vec<usize> {
+#     lines
+#         .iter()
+#         .enumerate()
+#         .filter_map(|(i, line)| match regex.is_match(line) {
+#             true => Some(i),
+#             false => None,
+#         })
+#         .collect() // turns anything iterable into a collection
+# }
 
 fn create_intervals(
+    lines: Vec<usize>,
     before_context: usize,
     after_context: usize,
-    match_lines: Vec<usize>,
-    lines: &[String],
 ) -> Vec<Interval> {
-    match_lines
+    lines
         .iter()
         .map(|line| {
             let start = line.saturating_sub(before_context);
@@ -214,6 +226,7 @@ fn create_intervals(
 }
 
 fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
+    // merge overlapping intervals
     intervals
         .into_iter()
         .coalesce(|p, c| {
@@ -226,7 +239,7 @@ fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
         .collect()
 }
 
-fn print_matches(intervals: Vec<Interval>, lines: &[String]) {
+fn print_results(intervals: Vec<Interval>, lines: Vec<String>) {
     for interval in intervals {
         for (line_no, line) in lines
             .iter()
@@ -244,7 +257,6 @@ fn print_matches(intervals: Vec<Interval>, lines: &[String]) {
 # }
 #
 fn main() {
-#     // let filename = "poem.txt";
 #     let poem = "I have a little shadow that goes in and out with me,
 #                 And what can be the use of him is more than I can see.
 #                 He is very, very like me from the heels up to the head;
@@ -256,20 +268,22 @@ fn main() {
 #                 And he sometimes gets so little that there’s none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
-#     let lines = read_file(mock_file);
 #
-#     let pattern = "little";
+#     // command line arguments
+#     let pattern = "(all)|(little)";
 #     let before_context = 1;
 #     let after_context = 1;
 #
-#     // // attempt to open the file
-#     // let lines = match File::open(filename) {
-#     //     Ok(file) => read_file(file),
-#     //     Err(e) => {
-#     //         eprintln!("Error opening {filename}: {e}");
-#     //         exit(1);
-#     //     }
-#     // };
+#     // attempt to open the file
+#     let lines = read_file(mock_file);
+#     //let lines = match File::open(filename) {
+#     //    // convert the poem into lines
+#     //    Ok(file) => read_file(file),
+#     //    Err(e) => {
+#     //        eprintln!("Error opening {filename}: {e}");
+#     //        exit(1);
+#     //    }
+#     //};
 #
 #     // compile the regular expression
 #     let regex = match Regex::new(pattern) {
@@ -281,27 +295,17 @@ fn main() {
 #     };
 #
 #     // store the 0-based line number for any matched line
-#     let match_lines: Vec<_> = lines
-#         .iter()
-#         .enumerate()
-#         .filter_map(|(i, line)| match regex.is_match(line) {
-#             true => Some(i),
-#             false => None,
-#         })
-#         .collect(); // turns anything iterable into a collection
-#
-#     // exit early if no matches were found
-#     if match_lines.is_empty() {
-#         return;
-#     }
+#     let match_lines = find_matching_lines(&lines, regex);
 #
 #     // create intervals of the form [a,b] with the before/after context
 #     let intervals =
-#         create_intervals(before_context, after_context, match_lines, &lines);
+#         create_intervals(match_lines, before_context, after_context);
 #
+    // merge overlapping intervals
     let intervals = merge_intervals(intervals);
-
-    print_matches(intervals, &lines);
+#
+#     // print the lines
+#     print_results(intervals, lines);
 }
 
 struct Interval {
@@ -331,13 +335,22 @@ enhancements.
 
 Let's review the changes:
 
-Merging intervals has been refactored into a new function called
-`merge_intervals`.
+`create_intervals` was updated with the following changes:
 
-Printing the results was also refactored into a new function called
-`print_matches` with minor changes. Since we are making use of the `Interval`
-type, we update the `for` loop to use the `start` and `end` values of the
-`Interval`.
+- The return type was changed to `Vec<Interval>`
+- The tuple created from `start` and `end` are now used to create an `Interval`
+
+`merge_intervals` was updated with the following changes:
+
+- The argument `intervals` now has a type of `Vec<Interval>` and is _moved_
+  instead of the mutable borrow
+- `dedup_by` was replaced with `coalesce`
+
+`print_results` was updated with the following changes:
+
+- The argument `intervals` is now a `Vec<Interval>`
+- The `take` and `skip` iterator adaptors were updated to use the fields from
+  the `Interval`
 
 > Each interval is _dropped_ at the end of the loop iteration when written as
 > `for interval in intervals`. If the loop were written as

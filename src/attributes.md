@@ -42,7 +42,8 @@ for the crate.
 
 Recall in the last section, we derived the `Debug` and `PartialEq` traits. We
 achieved this using the `#[derive(...)]` attribute. Notice how this attribute is
-placed directly before the definition of the `Interval` `struct`.
+placed directly before the definition of the `Interval` `struct`. This is an
+example of an `OuterAttribute`.
 
 ```rust,noplayground
 #[derive(Debug, PartialEq)]
@@ -83,4 +84,5 @@ Additionally, [Rust By Example] offers extra material and illustrates various
 
 # Next
 
-Onwards to command line argument parsing!
+Attributes offer even greater utility, which we'll explore through command line
+argument parsing!

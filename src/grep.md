@@ -9,22 +9,32 @@ completed code:
 
 ````rust
 #![allow(unused_imports)]
-extern crate itertools; // this is needed for the playground
 extern crate regex; // this is needed for the playground
 use interval::{Interval, IntervalError};
 use itertools::Itertools;
 use regex::Regex;
 use std::fs::File;
-use std::io::{BufRead, BufReader, Read};
+use std::io::Read;
+use std::io::{BufRead, BufReader};
 use std::process::exit;
 
+fn find_matching_lines(lines: &[String], regex: Regex) -> Vec<usize> {
+    lines
+        .iter()
+        .enumerate()
+        .filter_map(|(i, line)| match regex.is_match(line) {
+            true => Some(i),
+            false => None,
+        })
+        .collect() // turns anything iterable into a collection
+}
+
 fn create_intervals(
+    lines: Vec<usize>,
     before_context: usize,
     after_context: usize,
-    match_lines: Vec<usize>,
-    lines: &[String],
 ) -> Result<Vec<Interval<usize>>, IntervalError> {
-    match_lines
+    lines
         .iter()
         .map(|line| {
             let start = line.saturating_sub(before_context);
@@ -35,13 +45,14 @@ fn create_intervals(
 }
 
 fn merge_intervals(intervals: Vec<Interval<usize>>) -> Vec<Interval<usize>> {
+    // merge overlapping intervals
     intervals
         .into_iter()
-        .coalesce(|p, c| p.merge(&c).or(Err((p, c))))
+        .coalesce(|p, c| p.merge(&c).map_err(|_| (p, c)))
         .collect()
 }
 
-fn print_matches(intervals: Vec<Interval<usize>>, lines: &[String]) {
+fn print_results(intervals: Vec<Interval<usize>>, lines: Vec<String>) {
     for interval in intervals {
         for (line_no, line) in lines
             .iter()
@@ -59,7 +70,6 @@ fn read_file(file: impl Read) -> Vec<String> {
 }
 
 fn main() {
-    // let filename = "poem.txt";
     let poem = "I have a little shadow that goes in and out with me,
                 And what can be the use of him is more than I can see.
                 He is very, very like me from the heels up to the head;
@@ -71,20 +81,22 @@ fn main() {
                 And he sometimes gets so little that there’s none of him at all.";
 
     let mock_file = std::io::Cursor::new(poem);
-    let lines = read_file(mock_file);
 
-    let pattern = "little";
+    // command line arguments
+    let pattern = "(all)|(little)";
     let before_context = 1;
     let after_context = 1;
 
-    // // attempt to open the file
-    // let lines = match File::open(filename) {
-    //     Ok(file) => read_file(file),
-    //     Err(e) => {
-    //         eprintln!("Error opening {filename}: {e}");
-    //         exit(1);
-    //     }
-    // };
+    // attempt to open the file
+    let lines = read_file(mock_file);
+    //let lines = match File::open(filename) {
+    //    // convert the poem into lines
+    //    Ok(file) => read_file(file),
+    //    Err(e) => {
+    //        eprintln!("Error opening {filename}: {e}");
+    //        exit(1);
+    //    }
+    //};
 
     // compile the regular expression
     let regex = match Regex::new(pattern) {
@@ -96,37 +108,23 @@ fn main() {
     };
 
     // store the 0-based line number for any matched line
-    let match_lines: Vec<_> = lines
-        .iter()
-        .enumerate()
-        .filter_map(|(i, line)| match regex.is_match(line) {
-            true => Some(i),
-            false => None,
-        })
-        .collect(); // turns anything iterable into a collection
-
-    // exit early if no matches were found
-    if match_lines.is_empty() {
-        return;
-    }
+    let match_lines = find_matching_lines(&lines, regex);
 
     // create intervals of the form [a,b] with the before/after context
-    let intervals = match create_intervals(
-        before_context,
-        after_context,
-        match_lines,
-        &lines,
-    ) {
-        Ok(intervals) => intervals,
-        Err(_) => {
-            eprintln!("An error occurred while creating intervals");
-            exit(1);
-        }
-    };
+    let intervals =
+        match create_intervals(match_lines, before_context, after_context) {
+            Ok(intervals) => intervals,
+            Err(_) => {
+                eprintln!("An error occurred while creating intervals");
+                exit(1);
+            }
+        };
 
+    // merge overlapping intervals
     let intervals = merge_intervals(intervals);
 
-    print_matches(intervals, &lines);
+    // print the lines
+    print_results(intervals, lines);
 }
 
 pub mod interval {
@@ -155,28 +153,6 @@ pub mod interval {
     pub struct Interval<T> {
         pub start: T,
         pub end: T,
-    }
-
-    use std::fmt;
-    impl<T: fmt::Display> fmt::Display for Interval<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> fmt::Result {
-            write!(f, "[{}, {}]", self.start, self.end)
-        }
-    }
-
-    use std::cmp::Ordering;
-    impl<T: PartialEq + PartialOrd> PartialOrd for Interval<T> {
-        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-            if self == other {
-                Some(Ordering::Equal)
-            } else if self.end < other.start {
-                Some(Ordering::Less)
-            } else if self.start > other.end {
-                Some(Ordering::Greater)
-            } else {
-                None // Intervals overlap
-            }
-        }
     }
 
     impl<T: Copy + PartialOrd> Interval<T> {
@@ -248,6 +224,28 @@ pub mod interval {
                 })
             } else {
                 Err(IntervalError::NonOverlappingInterval)
+            }
+        }
+    }
+
+    use std::fmt;
+    impl<T: fmt::Display> fmt::Display for Interval<T> {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> fmt::Result {
+            write!(f, "[{}, {}]", self.start, self.end)
+        }
+    }
+
+    use std::cmp::Ordering;
+    impl<T: PartialEq + PartialOrd> PartialOrd for Interval<T> {
+        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+            if self == other {
+                Some(Ordering::Equal)
+            } else if self.end < other.start {
+                Some(Ordering::Less)
+            } else if self.start > other.end {
+                Some(Ordering::Greater)
+            } else {
+                None // Intervals overlap
             }
         }
     }

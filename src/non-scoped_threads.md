@@ -62,7 +62,7 @@ complain about code that would run without issues in most other languages? Even
 though it's not the case in this example, in a more general sense, the spawned
 thread created in `main` could potentially outlive the thread from which it was
 created. Because the closure borrows the `error` value, the parent thread could
-go out of scope, causing the `error` value to be dropped making the reference
+go out of scope, causing the `error` value to be dropped rendering the reference
 invalid. Because the compiler _can't_ know whether or not that's going to
 happen, we see the error:
 
@@ -125,8 +125,8 @@ are the foundation of Rust's [fearless concurrency] goals. These rules ensure
 that concurrency in your programs is both safe and efficient.
 
 Now that we understand why the traditional fork/join model, which works in many
-other languages, is likely to fail in Rust, let's explore how to correctly apply
-this approach!
+other languages, is likely to fail in Rust, let's explore how to correctly
+implement this approach!
 
 [thread]: https://doc.rust-lang.org/std/thread/
 [spawn]: https://doc.rust-lang.org/stable/std/thread/fn.spawn.html

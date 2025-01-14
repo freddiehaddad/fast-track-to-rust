@@ -12,17 +12,29 @@ use interval::{Interval, IntervalError};
 use itertools::Itertools;
 use regex::Regex;
 use std::fs::File;
-use std::io::{BufRead, BufReader, Read};
+use std::io::Read;
+use std::io::{BufRead, BufReader};
 use std::path::PathBuf;
 use std::process::exit;
 use std::thread;
 
+fn find_matching_lines(lines: &[String], regex: &Regex) -> Vec<usize> {
+    lines
+        .iter()
+        .enumerate()
+        .filter_map(|(i, line)| match regex.is_match(line) {
+            true => Some(i),
+            false => None,
+        })
+        .collect() // turns anything iterable into a collection
+}
+
 fn create_intervals(
+    lines: Vec<usize>,
     before_context: usize,
     after_context: usize,
-    match_lines: Vec<usize>,
 ) -> Result<Vec<Interval<usize>>, IntervalError> {
-    match_lines
+    lines
         .iter()
         .map(|line| {
             let start = line.saturating_sub(before_context);
@@ -33,16 +45,17 @@ fn create_intervals(
 }
 
 fn merge_intervals(intervals: Vec<Interval<usize>>) -> Vec<Interval<usize>> {
+    // merge overlapping intervals
     intervals
         .into_iter()
-        .coalesce(|p, c| p.merge(&c).or(Err((p, c))))
+        .coalesce(|p, c| p.merge(&c).map_err(|_| (p, c)))
         .collect()
 }
 
-fn print_matches(
+fn print_results(
     intervals: Vec<Interval<usize>>,
-    line_numbers: bool,
     lines: Vec<String>,
+    line_number: bool,
 ) {
     for interval in intervals {
         for (line_no, line) in lines
@@ -51,7 +64,7 @@ fn print_matches(
             .take(interval.end + 1)
             .skip(interval.start)
         {
-            if line_numbers {
+            if line_number {
                 print!("{}: ", line_no + 1);
             }
             println!("{}", line);
@@ -88,11 +101,13 @@ struct Cli {
     files: Vec<PathBuf>,
 }
 
+// Result from a thread
 struct GrepSuccess {
     intervals: Vec<Interval<usize>>,
     lines: Vec<String>,
 }
 
+// Result from a failed thread
 struct GrepFailure {
     error: String,
 }
@@ -100,15 +115,15 @@ struct GrepFailure {
 fn main() {
     let cli = Cli::parse();
 
-    // get values from command line arguments
+    // get values from clap
+    let pattern = cli.pattern;
     let line_number = cli.line_number;
-    let pattern = &cli.pattern;
     let before_context = cli.before_context as usize;
     let after_context = cli.after_context as usize;
     let files = cli.files;
 
     // compile the regular expression
-    let regex = match Regex::new(pattern) {
+    let regex = match Regex::new(&pattern) {
         Ok(re) => re, // bind re to regex
         Err(e) => {
             eprintln!("{e}"); // write to standard error
@@ -120,7 +135,6 @@ fn main() {
         let handles: Vec<_> = files
             .iter()
             .map(|file| {
-                // check filename is valid
                 let filename = match file.to_str() {
                     Some(filename) => filename,
                     None => {
@@ -134,35 +148,23 @@ fn main() {
                 };
 
                 // attempt to open the file
-                let file = match File::open(filename) {
-                    Ok(handle) => handle,
-                    Err(e) => {
-                        return Err(GrepFailure {
-                            error: format!("Error opening file: {e}"),
-                        })
-                    }
-                };
-
+                File::open(filename).map_err(|e| GrepFailure {
+                    error: format!("Error opening {filename}: {e}"),
+                })
+            })
+            .map_ok(|file| {
                 // only spawn a thread for accessible file
-                Ok(s.spawn(|| {
+                s.spawn(|| {
                     let lines = read_file(file);
 
                     // store the 0-based line number for any matched line
-                    let match_lines: Vec<_> = lines
-                        .iter()
-                        .enumerate()
-                        .filter_map(|(i, line)| match regex.is_match(line) {
-                            true => Some(i),
-                            false => None,
-                        })
-                        .collect();
+                    let match_lines = find_matching_lines(&lines, &regex);
 
-                    // create intervals of the form [a,b] with the before/after
-                    // context
+                    // create intervals of the form [a,b] with the before/after context
                     let intervals = match create_intervals(
+                        match_lines,
                         before_context,
                         after_context,
-                        match_lines,
                     ) {
                         Ok(intervals) => intervals,
                         Err(_) => return Err(GrepFailure {
@@ -172,9 +174,10 @@ fn main() {
                         }),
                     };
 
+                    // merge overlapping intervals
                     let intervals = merge_intervals(intervals);
                     Ok(GrepSuccess { intervals, lines })
-                }))
+                })
             })
             .collect();
 
@@ -190,10 +193,10 @@ fn main() {
 
             if let Ok(result) = result.join() {
                 match result {
-                    Ok(result) => print_matches(
+                    Ok(result) => print_results(
                         result.intervals,
-                        line_number,
                         result.lines,
+                        line_number,
                     ),
                     Err(e) => eprintln!("{}", e.error),
                 };
@@ -228,28 +231,6 @@ pub mod interval {
     pub struct Interval<T> {
         pub start: T,
         pub end: T,
-    }
-
-    use std::fmt;
-    impl<T: fmt::Display> fmt::Display for Interval<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> fmt::Result {
-            write!(f, "[{}, {}]", self.start, self.end)
-        }
-    }
-
-    use std::cmp::Ordering;
-    impl<T: PartialEq + PartialOrd> PartialOrd for Interval<T> {
-        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-            if self == other {
-                Some(Ordering::Equal)
-            } else if self.end < other.start {
-                Some(Ordering::Less)
-            } else if self.start > other.end {
-                Some(Ordering::Greater)
-            } else {
-                None // Intervals overlap
-            }
-        }
     }
 
     impl<T: Copy + PartialOrd> Interval<T> {
@@ -321,6 +302,28 @@ pub mod interval {
                 })
             } else {
                 Err(IntervalError::NonOverlappingInterval)
+            }
+        }
+    }
+
+    use std::fmt;
+    impl<T: fmt::Display> fmt::Display for Interval<T> {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> fmt::Result {
+            write!(f, "[{}, {}]", self.start, self.end)
+        }
+    }
+
+    use std::cmp::Ordering;
+    impl<T: PartialEq + PartialOrd> PartialOrd for Interval<T> {
+        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+            if self == other {
+                Some(Ordering::Equal)
+            } else if self.end < other.start {
+                Some(Ordering::Less)
+            } else if self.start > other.end {
+                Some(Ordering::Greater)
+            } else {
+                None // Intervals overlap
             }
         }
     }

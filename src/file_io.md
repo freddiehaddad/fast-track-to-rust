@@ -11,6 +11,12 @@ additional packages in Rust's standard library.
 > slice is no longer sufficient, so we need to utilize the [`String`] [^1] type
 > in Rust.
 
+> Storing Data on the Heap
+>
+> Should you find yourself needing to allocate memory directly on the heap, the
+> [`Box`] type is commonly used. You can find numerous examples on its usage in
+> the [documentation on the `Box` type].
+
 Let's start by creating a function that reads a file and returns a vector of
 strings (`Vec<String>`) where each string represents a line. Here is the
 function signature:[^2] [^3]
@@ -24,10 +30,7 @@ fn read_file(file: File) -> Vec<String> {
 This is the code that we'll add to the `read_file` function:
 
 ```rust,noplayground
-BufReader::new(file)
-    .lines()
-    .map_while(Result::ok)
-    .collect()
+BufReader::new(file).lines().map_while(Result::ok).collect()
 ```
 
 The `read_file` function accepts a file handle and utilizes [`BufReader`] to
@@ -46,16 +49,34 @@ The modifications to the `main` function:
 
 ```rust,noplayground
 fn main() {
+    // command line arguments
+#     let pattern = "all";
+#     let before_context = 1;
+#     let after_context = 1;
     let filename = "poem.txt";
 
     // attempt to open the file
     let lines = match File::open(filename) {
+        // convert the poem into lines
         Ok(file) => read_file(file),
         Err(e) => {
             eprintln!("Error opening {filename}: {e}");
             exit(1);
         }
     };
+#
+#     // store the 0-based line number for any matched line
+#     let match_lines = find_matching_lines(&lines, pattern);
+#
+#     // create intervals of the form [a,b] with the before/after context
+#     let mut intervals =
+#         create_intervals(match_lines, before_context, after_context);
+#
+#     // merge overlapping intervals
+#     merge_intervals(&mut intervals);
+#
+#     // print the lines
+#     print_results(intervals, lines);
 }
 ```
 
@@ -65,42 +86,47 @@ There's a lot going on here, so let's break it down step by step.
 
 ### `read_file`
 
-Since we're reading from a file, the `lines()` iterator can fail. Therefore, it
-returns a `Result`. On a successful read, it yields the next line as a `String`
-wrapped in the `Ok` variant. If it fails, it yields an `Error` wrapped in the
-`Err` variant.
-
-On the next line in `read_file`, we use the iterator adaptor `map_while`. This
-might be a bit confusing since we haven't covered user-defined types and methods
-yet. For now, just know that `Result::ok` is a method associated with the
-`Result` type, similar to a class method in object-oriented programming
-languages.
-
-Here are the relevant parts from the
-[source code](https://doc.rust-lang.org/std/result/enum.Result.html), cleaned up
-for readability:
-
 ```rust,noplayground
-pub enum Result<T, E> {
-   Ok(T),
-   Err(E),
-}
-
-impl<T, E> Result<T, E> {
-    pub fn ok(self) -> Option<T> {
-        match self {
-            Ok(x) => Some(x),
-            Err(_) => None,
-        }
-    }
+fn read_file(file: File) -> Vec<String> {
+    BufReader::new(file).lines().map_while(Result::ok).collect()
 }
 ```
 
-The `ok` method matches against the `Result` (`self`)[^4] and returns an
-`Option`. If the value is `Ok`, it returns `Some` with the value; otherwise, it
-returns `None`. This conversion is necessary because the map method requires the
-closure to return an `Option`. Converting `Err` to `None` drops the error value
-and causes `map_while` to stop yielding.
+1. **`BufReader`**: `BufReader::new(file)` creates a buffered reader from the
+   provided `File`. This helps in efficiently reading the file line by line.
+1. **`lines()`**: The `lines()` method on `BufReader` returns an iterator over
+   the lines in the file. Because reading from a file can file, each line is
+   wrapped in a `Result`, which can be either `Ok` (containing the line) or
+   `Err` (containing an error).
+1. **`map_while(Result::ok)`**: The `map_while` method is used to transform the
+   iterator. It applies the `Result::ok` function to each item, which converts
+   `Ok(line)` to `Some(line)` and `Err(_)` to `None`. The iteration stops when
+   the first `None` is encountered. Here are the relevant parts from the
+   [source code](https://doc.rust-lang.org/std/result/enum.Result.html), cleaned
+   up for readability:
+
+   ```rust,noplayground
+   pub enum Result<T, E> {
+      Ok(T),
+      Err(E),
+   }
+
+   impl<T, E> Result<T, E> {
+       pub fn ok(self) -> Option<T> {
+           match self {
+               Ok(x) => Some(x),
+               Err(_) => None,
+           }
+       }
+   }
+   ```
+
+   This conversion is necessary because the map method requires the closure to
+   return an `Option`. Converting `Err` to `None` drops the error value and
+   causes `map_while` to stop yielding.
+
+1. **`collect()`**: The `collect()` method gathers all the `Some(line)` values
+   into a `Vec<String>` that gets returned to the caller.
 
 ### `main`
 
@@ -118,14 +144,24 @@ Here are the changes with the unrelated parts of the program hidden:
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::process::exit;
-
+#
+# fn find_matching_lines(lines: &[String], pattern: &str) -> Vec<usize> {
+#     lines
+#         .iter()
+#         .enumerate()
+#         .filter_map(|(i, line)| match line.contains(pattern) {
+#             true => Some(i),
+#             false => None,
+#         })
+#         .collect() // turns anything iterable into a collection
+# }
+#
 # fn create_intervals(
+#     lines: Vec<usize>,
 #     before_context: usize,
 #     after_context: usize,
-#     match_lines: Vec<usize>,
-#     lines: &[String],
 # ) -> Vec<(usize, usize)> {
-#     match_lines
+#     lines
 #         .iter()
 #         .map(|line| {
 #             (
@@ -136,45 +172,7 @@ use std::process::exit;
 #         .collect()
 # }
 #
-fn read_file(file: File) -> Vec<String> {
-    BufReader::new(file).lines().map_while(Result::ok).collect()
-}
-
-fn main() {
-    let filename = "poem.txt";
-
-#     let pattern = "all";
-#     let before_context = 1;
-#     let after_context = 1;
-#
-    // attempt to open the file
-    let lines = match File::open(filename) {
-        Ok(file) => read_file(file),
-        Err(e) => {
-            eprintln!("Error opening {filename}: {e}");
-            exit(1);
-        }
-    };
-
-#     // store the 0-based line number for any matched line
-#     let match_lines: Vec<_> = lines
-#         .iter()
-#         .enumerate()
-#         .filter_map(|(i, line)| match line.contains(pattern) {
-#             true => Some(i),
-#             false => None,
-#         })
-#         .collect(); // turns anything iterable into a collection
-#
-    // exit early if no matches were found
-    if match_lines.is_empty() {
-        return;
-    }
-#
-#     // create intervals of the form [a,b] with the before/after context
-#     let mut intervals =
-#         create_intervals(before_context, after_context, match_lines, &lines);
-#
+# fn merge_intervals(intervals: &mut Vec<(usize, usize)>) {
 #     // merge overlapping intervals
 #     intervals.dedup_by(|next, prev| {
 #         if prev.1 < next.0 {
@@ -183,9 +181,10 @@ fn main() {
 #             prev.1 = next.1;
 #             true
 #         }
-#     });
+#     })
+# }
 #
-#     // print the lines
+# fn print_results(intervals: Vec<(usize, usize)>, lines: Vec<String>) {
 #     for (start, end) in intervals {
 #         for (line_no, line) in
 #             lines.iter().enumerate().take(end + 1).skip(start)
@@ -193,6 +192,41 @@ fn main() {
 #             println!("{}: {}", line_no + 1, line)
 #         }
 #     }
+# }
+
+fn read_file(file: File) -> Vec<String> {
+    BufReader::new(file).lines().map_while(Result::ok).collect()
+}
+
+fn main() {
+    // command line arguments
+#     let pattern = "all";
+#     let before_context = 1;
+#     let after_context = 1;
+    let filename = "poem.txt";
+
+    // attempt to open the file
+    let lines = match File::open(filename) {
+        // convert the poem into lines
+        Ok(file) => read_file(file),
+        Err(e) => {
+            eprintln!("Error opening {filename}: {e}");
+            exit(1);
+        }
+    };
+#
+#     // store the 0-based line number for any matched line
+#     let match_lines = find_matching_lines(&lines, pattern);
+#
+#     // create intervals of the form [a,b] with the before/after context
+#     let mut intervals =
+#         create_intervals(match_lines, before_context, after_context);
+#
+#     // merge overlapping intervals
+#     merge_intervals(&mut intervals);
+#
+#     // print the lines
+#     print_results(intervals, lines);
 }
 ```
 
@@ -214,6 +248,9 @@ work. Let's see how we can leverage an in-memory buffer to represent an open
 file.
 
 [`String`]: https://doc.rust-lang.org/rust-by-example/std/str.html
+[`Box`]: https://doc.rust-lang.org/std/boxed/struct.Box.html
+[documentation on the `Box` type]:
+  https://doc.rust-lang.org/book/ch15-01-box.html
 [`todo!()`]: https://doc.rust-lang.org/std/macro.todo.html
 [`unimplemented!()`]: https://doc.rust-lang.org/std/macro.unimplemented.html
 [`BufReader`]: https://doc.rust-lang.org/std/io/struct.BufReader.html

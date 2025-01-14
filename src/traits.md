@@ -182,9 +182,12 @@ fn main() {
 > `Option`. For `Result`, it returns the `Ok` value or panics if the value is
 > `Err`. Its usage is generally discouraged and is only used here for brevity.
 
-> Rust includes support for operator overloading. You can find all the detailed
-> information in the [Operator Overloading] section of the [Rust by Example]
-> book and in the [`ops`] module.
+> Operator Overloading
+>
+> You might have noticed the comparison between intervals using `==` and `!=`.
+> This works because Rust includes support for operator overloading! You can
+> find all the detailed information in the [Operator Overloading] section of the
+> [Rust by Example] book and in the [`ops`] module.
 
 ## Implementing a Trait
 

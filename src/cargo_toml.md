@@ -74,6 +74,8 @@ regex = "1.11.1"
 
 # Exercise
 
+> These exercises must be completed locally.
+
 - Add the `clap` crate and include the `derive`[^2] feature. More information to
   accomplish this can be found [here](https://crates.io/crates/clap) and
   [here](https://docs.rs/clap/latest/clap/_derive/_tutorial/chapter_0/index.html).

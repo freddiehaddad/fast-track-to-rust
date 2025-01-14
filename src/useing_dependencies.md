@@ -9,6 +9,7 @@ We've been doing this in our grep program:
 
 ```rust,noplayground
 use std::fs::File;
+use std::io::Read;
 use std::io::{BufRead, BufReader};
 use std::process::exit;
 ```
