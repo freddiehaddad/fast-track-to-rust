@@ -1,11 +1,9 @@
 # Shortcuts
 
-This course was created using [mdBook] and provides several conveniences as you
-progress through it.
+This course, developed with [mdBook], features efficient keyboard shortcuts for
+streamlined navigation.
 
-## Keyboard Navigation
-
-Useful keyboard shortcuts:
+## Keyboard Shortcuts
 
 - `Arrow-Left`: Navigate to the previous page.
 - `Arrow-Right`: Navigate to the next page.
