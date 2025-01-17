@@ -329,3 +329,8 @@ pub mod interval {
     }
 }
 ````
+
+> You can find the final version of the Grep program we built together during
+> this course [here].
+
+[here]: https://github.com/freddiehaddad/grep
