@@ -1,8 +1,9 @@
 # Installation
 
-It is recommended to install the Rust development toolchain on your system.
-After installation, you will have everything needed to build and run Rust code
-on your computer.
+Most exercises in this book can be completed in your web browser, with a few
+exceptions. However, it is recommended to install the Rust development toolchain
+on your system. Once installed, you'll have everything you need to build and run
+Rust code locally.
 
 Installation is accomplished using `rustup`, the Rust toolchain installer. Once
 completed, you'll have `rustup`, `cargo`, and `rustc`.
