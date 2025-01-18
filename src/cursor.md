@@ -1,6 +1,6 @@
 # Cursor
 
-Our production grep program now has the capability to access real files.
+Our production rustle program now has the capability to access real files.
 However, the Rust Playground does not support opening files directly. To ensure
 this course remains functional in your web browser, we need to use an in-memory
 buffer to simulate a file. This technique of mocking an open file is also
@@ -57,7 +57,7 @@ let lines = read_file(mock_file);
 
 ## Putting it All Together
 
-With these changes applied to our grep program, we can once again utilize the
+With these changes applied to our rustle program, we can once again utilize the
 Rust Playground to extend its functionality and continue learning Rust.
 
 ```rust

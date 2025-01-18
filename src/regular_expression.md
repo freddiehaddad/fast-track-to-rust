@@ -21,9 +21,9 @@ fn new(re: &str) -> Result<Regex, Error>
 ```
 
 The function signature indicates that the `Ok` variant returns a `Regex`, while
-the `Err` variant returns an `Error`. Since our grep program can't continue with
-an invalid regular expression, we need to catch that case, display a helpful
-error message, and exit the program.
+the `Err` variant returns an `Error`. Since our rustle program can't continue
+with an invalid regular expression, we need to catch that case, display a
+helpful error message, and exit the program.
 
 Let's put all this together:
 
@@ -53,9 +53,9 @@ fn main() {
 Run the code to see the error. Then, correct the it by adding the missing
 parenthesis `)` and re-run the code.
 
-## Updating Grep
+## Updating Rustle
 
-We now have enough context to modify our Grep program to include regular
+We now have enough context to modify our rustle program to include regular
 expression support. Below are the changes, with the unrelated parts of the
 program hidden:
 

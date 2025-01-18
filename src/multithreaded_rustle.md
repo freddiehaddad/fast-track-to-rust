@@ -1,7 +1,7 @@
-# Multithreaded Grep
+# Multithreaded Rustle
 
 With our understanding of scoped vs non-scoped threads, we are now prepared to
-correctly update Grep to process each file specified on the command line in a
+correctly update rustle to process each file specified on the command line in a
 separate thread.
 
 Here's the updated version of the program with the changes visible.
@@ -105,13 +105,13 @@ fn find_matching_lines(lines: &[String], regex: &Regex) -> Vec<usize> {
 # }
 
 // Result from a thread
-struct GrepSuccess {
+struct RustleSuccess {
     intervals: Vec<Interval<usize>>,
     lines: Vec<String>,
 }
 
 // Result from a failed thread
-struct GrepFailure {
+struct RustleFailure {
     error: String,
 }
 
@@ -119,7 +119,7 @@ fn main() {
     // let cli = Cli::parse(); // for production use
     // mock command line arguments
     let cli = match Cli::try_parse_from([
-        "grep", // executable name
+        "rustle", // executable name
         "--line-number",
         "--before-context",
         "1",
@@ -186,7 +186,7 @@ there's simply no compelling case to stick with cpp!",
                 let filename = match file.to_str() {
                     Some(filename) => filename,
                     None => {
-                        return Err(GrepFailure {
+                        return Err(RustleFailure {
                             error: format!(
                                 "Invalid filename: {}",
                                 file.display()
@@ -206,7 +206,7 @@ there's simply no compelling case to stick with cpp!",
                 //};
 
                 if !mock_disk.contains_key(filename) {
-                    return Err(GrepFailure {
+                    return Err(RustleFailure {
                         error: format!("File not found: {}", filename),
                     });
                 }
@@ -230,7 +230,7 @@ there's simply no compelling case to stick with cpp!",
                         after_context,
                     ) {
                         Ok(intervals) => intervals,
-                        Err(_) => return Err(GrepFailure {
+                        Err(_) => return Err(RustleFailure {
                             error: String::from(
                                 "An error occurred while creating intervals",
                             ),
@@ -239,7 +239,7 @@ there's simply no compelling case to stick with cpp!",
 
                     // merge overlapping intervals
                     let intervals = merge_intervals(intervals);
-                    Ok(GrepSuccess { intervals, lines })
+                    Ok(RustleSuccess { intervals, lines })
                 })
             })
             .collect();
@@ -402,7 +402,7 @@ there's simply no compelling case to stick with cpp!",
 > The error message for the bad file doesn't appear in the playground output
 > because standard error output isn't captured.
 
-Our grep program is now multithreaded and processes all the input files in
+Our rustle program is now multithreaded and processes all the input files in
 parallel! Let's walk through the code changes.
 
 ### `mock_disk`
@@ -421,9 +421,9 @@ added a new poem written by `yours truly`.
 1. The `map_ok` iterator adapter processes each `Result`, calling the provided
    closure on any `Ok` values, allowing us to ignore any invalid filenames. The
    provided `Scope` (`s`) spawns one thread per file for processing. The closure
-   returns a `Result`: `Err` with an error message in a `GrepFailure` struct if
-   processing fails, or `Ok` with a `GrepSuccess` struct containing intervals
-   and lines from the input file if successful.
+   returns a `Result`: `Err` with an error message in a `RustleFailure` struct
+   if processing fails, or `Ok` with a `RustleSuccess` struct containing
+   intervals and lines from the input file if successful.
 1. Use `collect` to create a vector (`Vec`) of results from each file iteration,
    binding it to `handles`.
 1. Finally, iterate over the elements in the `handles` vector using a for loop.

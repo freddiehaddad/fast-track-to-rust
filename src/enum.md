@@ -7,10 +7,10 @@ and can encapsulate values within their variants! [^1]
 
 ## Using an `enum` for Errors
 
-For our grep program, we’ll create an `enum` to represent possible errors during
-`Interval` operations. For example, when a user creates an `Interval`, the
-starting value must be less than or equal to the ending value. Additionally, if
-a user wants to merge two intervals, they must overlap. If these conditions
+For our rustle program, we’ll create an `enum` to represent possible errors
+during `Interval` operations. For example, when a user creates an `Interval`,
+the starting value must be less than or equal to the ending value. Additionally,
+if a user wants to merge two intervals, they must overlap. If these conditions
 aren't met, we’ll return an error (`Err`) using one of our `enum` variants.
 
 ## Defining an `enum`
@@ -59,7 +59,7 @@ fn merge(&self, other: &Self) -> Result<Self, IntervalError> {
 > definition, you can omit the field specifiers. This technique is referred to
 > as _field init shorthand_ syntax. [^2]
 
-## Updating Grep
+## Updating Rustle
 
 With the `Interval` changes implemented, we need to update the
 `create_intervals` and `merge_intervals` functions to accommodate the `Result`
@@ -142,10 +142,10 @@ let intervals =
     };
 ```
 
-# Updating Grep
+# Updating Rustle
 
 With our changes in place, our Interval now supports error handling via `Result`
-and our grep program properly handles any errors.
+and our rustle program properly handles any errors.
 
 ```rust
 # #![allow(unused_imports)]

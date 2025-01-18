@@ -30,12 +30,12 @@ fn main() {
 }
 ```
 
-## Grep Variables
+## Rustle Variables
 
-To begin with our grep program, we'll avoid handling user input via command line
-arguments for now. Instead, we'll hard code some strings and perform some simple
-_grepping_. Let's use the famous poem _My Shadow_ by the poet Robert Louis
-Stevenson as our input.
+To begin with our rustle program, we'll avoid handling user input via command
+line arguments for now. Instead, we'll hard code some strings and perform some
+simple _rustling_. Let's use the famous poem _My Shadow_ by the poet Robert
+Louis Stevenson as our input.
 
 ```rust,editable
 fn main() {

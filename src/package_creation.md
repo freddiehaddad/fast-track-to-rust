@@ -18,26 +18,26 @@ cargo 1.81.0 (2dbb1af80 2024-08-20)
 
 If the above commands worked, you're ready to go!
 
-1. Use `cargo new grep` to create a new Rust package named `grep` for our
+1. Use `cargo new rustle` to create a new Rust package named `rustle` for our
    project:
 
    ```console
-   $ cargo new grep
+   $ cargo new rustle
    ∙
-       Creating binary (application) `grep` package
+       Creating binary (application) `rustle` package
    note: see more `Cargo.toml` keys and their definitions at
    https://doc.rust-lang.org/cargo/reference/manifest.html
    ```
 
-1. Navigate to the `grep` directory and use `cargo run` to build and run the
+1. Navigate to the `rustle` directory and use `cargo run` to build and run the
    program:
 
    ```console
-   $ cd grep
+   $ cd rustle
    $ cargo run
-      Compiling grep v0.1.0 (S:\projects\git\grep)
+      Compiling rustle v0.1.0 (S:\projects\git\rustle)
        Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s
-        Running `target\debug\grep.exe`
+        Running `target\debug\rustle.exe`
    Hello, world!
    ```
 

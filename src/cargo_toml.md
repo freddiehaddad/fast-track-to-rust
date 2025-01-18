@@ -6,7 +6,7 @@ simple.
 
 ```toml
 [package]
-name = "grep"
+name = "rustle"
 version = "0.1.0"
 edition = "2021"
 
@@ -64,7 +64,7 @@ Either method produces the same result.
 
 ```toml
 [package]
-name = "grep"
+name = "rustle"
 version = "0.1.0"
 edition = "2021"
 

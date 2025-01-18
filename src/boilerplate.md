@@ -60,7 +60,7 @@ In this section, we:
 
 # Next
 
-Let's dive into building our grep program. We'll start by setting up the basic
+Let's dive into building our rustle program. We'll start by setting up the basic
 structure and then gradually add more functionality.
 
 [string slice]:

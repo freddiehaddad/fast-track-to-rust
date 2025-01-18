@@ -1,6 +1,6 @@
 # Non-scoped Threads
 
-The simplest way to enable multithreading support in our Grep program is to
+The simplest way to enable multithreading support in our rustle program is to
 spawn a thread for each specified file, perform the pattern matching steps we've
 developed, and print the results using a fork/join pattern. If you have a C++
 background, you might start by exploring the functions in the [thread] module,

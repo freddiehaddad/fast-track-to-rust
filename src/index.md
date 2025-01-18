@@ -1,10 +1,10 @@
 # Welcome to Fast Track to Rust
 
 This course is designed to introduce you to the Rust programming language by
-building an actual program. We'll be developing a grep-like program with a
-minimal subset of the features found in the [GNU] [^1] [grep] [^2] utility. This
-means we'll start with what we know and iterate upon the design as we learn more
-about the language.
+building an actual program,. We'll be developing a grep-like program, called
+rustle[^1] with a minimal subset of the features found in the [GNU] [^2] [grep]
+[^3] utility. This means we'll start with what we know and iterate upon the
+design as we learn more about the language.
 
 > The official URL for this online course is:
 > [https://freddiehaddad.github.io/fast-track-to-rust](https://freddiehaddad.github.io/fast-track-to-rust)
@@ -32,9 +32,14 @@ Enough chit chat, let's get started!
 ---
 
 [^1]:
+    The name Rustle was chosen because it's a play on the word "rust" and
+    represents the sound of leaves rustling as the program searches through
+    data.
+
+[^2]:
     GNU is an collection of free software commonly used as an operating system.
     The family of operating systems, known as Linux, are built from them.
 
-[^2]:
+[^3]:
     Grep searches one or more input files for lines containing a match to a
-    specified pattern. By default, Grep outputs the matching lines.
+    specified pattern. By default, grep outputs the matching lines.

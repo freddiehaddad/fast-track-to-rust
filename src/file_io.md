@@ -1,11 +1,11 @@
 # File I/O
 
-Our grep program wouldn't be complete without the ability to search text files.
-Given the potential for I/O errors, adding this capability now is convenient as
-we explore error handling and the `Result` type. This also introduces us to
-additional packages in Rust's standard library.
+Our rustle program wouldn't be complete without the ability to search text
+files. Given the potential for I/O errors, adding this capability now is
+convenient as we explore error handling and the `Result` type. This also
+introduces us to additional packages in Rust's standard library.
 
-> Up to this point, we've been able to use string literals in our grep program
+> Up to this point, we've been able to use string literals in our rustle program
 > because dynamic memory allocation wasn't needed. However, now that we will be
 > reading from a file, dynamic memory allocation becomes necessary. The string
 > slice is no longer sufficient, so we need to utilize the [`String`] [^1] type

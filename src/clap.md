@@ -1,15 +1,15 @@
 # Command Line Arguments
 
 In the [`Cargo.toml`] section, you were asked to add the [`clap`] crate as a
-dependency to support command line argument parsing for our grep program. With
+dependency to support command line argument parsing for our rustle program. With
 our current understanding of attributes, it's an ideal time to utilize this
-crate by extending our grep program to handle command line arguments.
+crate by extending our rustle program to handle command line arguments.
 
 One method for defining command line arguments with `clap` involves using custom
 attributes. This is why we specified the derive feature in the dependency.
 
 If you didn't complete the exercise and are working through this course locally,
-you can add the dependency to the grep crate with:
+you can add the dependency to the rustle crate with:
 
 ```console
 $ cargo add clap --features derive
@@ -23,16 +23,16 @@ their inner workings in depth. However, keep this section in mind as you
 continue your Rust journey, because the time will likely come when you will need
 to implement similar attributes yourself for code generation.
 
-## Extending Grep
+## Extending rustle
 
 We're going to add command line argument support to our program. However, we'll
 continue to mock the command line arguments to keep developing this course
 online. After configuring `clap`, this will be the auto-generated help (i.e.,
-typing `grep --help` in the terminal).
+typing `rustle --help` in the terminal).
 
 ```console
-$ grep.exe --help
-Usage: grep.exe [OPTIONS] <PATTERN> [FILES]...
+$ rustle.exe --help
+Usage: rustle.exe [OPTIONS] <PATTERN> [FILES]...
 
 Arguments:
   <PATTERN>   The regular expression to match
@@ -53,7 +53,7 @@ Options:
 > learn from. If you find yourself building a CLI application, you will most
 > certainly want to reference the [documentation].
 
-Here's the updated version of grep with command line argument support added:
+Here's the updated version of rustle with command line argument support added:
 
 ````rust
 # #![allow(unused_imports)]
@@ -167,7 +167,7 @@ fn main() {
     // let cli = Cli::parse(); // for production use
     // mock command line arguments
     let cli = match Cli::try_parse_from([
-        "grep", // executable name
+        "rustle", // executable name
         "--line-number",
         "--before-context",
         "1",
@@ -360,7 +360,7 @@ We made some minor code changes along with configuring `clap`. Most of it should
 be straightforward by now, so we'll focus on the new aspects:
 
 - The [`PathBuf`] module facilitates cross-platform path manipulation. Since our
-  grep program requires files to search, it's better to use `PathBuf` for
+  rustle program requires files to search, it's better to use `PathBuf` for
   handling that input.
 - We updated `print_results` to take a new boolean argument, `line_number`,
   which specifies whether or not to print line numbers in the output. If `true`,

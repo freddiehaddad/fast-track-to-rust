@@ -14,7 +14,7 @@ Let's take a moment to discuss the different types we've encountered:
   limit.
 
 Understanding these types will help us write more efficient and effective Rust
-code as we continue to build our grep program.
+code as we continue to build our rustle program.
 
 ## String Slice `str`
 
@@ -82,7 +82,7 @@ Here are some additional [primitive types] in Rust:
 ## User-defined Types
 
 In addition to the primitive types, Rust supports [user-defined types]. We'll
-cover them in more detail as we build our grep program. But to satisfy your
+cover them in more detail as we build our rustle program. But to satisfy your
 curiosity, some of the user-defined types include:
 
 | type     | description                                                                                                  |

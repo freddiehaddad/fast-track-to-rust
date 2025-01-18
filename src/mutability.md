@@ -1,6 +1,6 @@
 # Mutability
 
-Two lines of code were added to our grep program on lines 13 and 18. The
+Two lines of code were added to our rustle program on lines 13 and 18. The
 variable `i` will get incremented with each loop iteration and we'll use it to
 print the line number. Go ahead and run the code.
 

@@ -1,24 +1,24 @@
-# Grep
+# Rustle
 
-Now that we've covered traits, let's ensure our projects are synchronized. Our
-interval module has been enhanced to support several new capabilities. We can
-print programmer-facing intervals using the `Debug` trait and user-facing
-intervals using the `Display` trait. Additionally, we have limited support for
-comparing intervals through the `PartialEq` and `PartialOrd` traits. Here's the
-completed code:
+As we reach the end of this journey, I am pleased to present the final version
+of the rustle program, ready for production use. To compile a release version,
+be sure to use `cargo build --release`. I hope you have enjoyed this journey as
+much as I have enjoyed guiding you through it. Thank you very much for
+completing the course. Have fun on your Rust journey!
 
-````rust
-#![allow(unused_imports)]
-extern crate regex; // this is needed for the playground
+````rust,noplayground
+use clap::Parser;
 use interval::{Interval, IntervalError};
 use itertools::Itertools;
 use regex::Regex;
 use std::fs::File;
 use std::io::Read;
 use std::io::{BufRead, BufReader};
+use std::path::PathBuf;
 use std::process::exit;
+use std::thread;
 
-fn find_matching_lines(lines: &[String], regex: Regex) -> Vec<usize> {
+fn find_matching_lines(lines: &[String], regex: &Regex) -> Vec<usize> {
     lines
         .iter()
         .enumerate()
@@ -52,7 +52,11 @@ fn merge_intervals(intervals: Vec<Interval<usize>>) -> Vec<Interval<usize>> {
         .collect()
 }
 
-fn print_results(intervals: Vec<Interval<usize>>, lines: Vec<String>) {
+fn print_results(
+    intervals: Vec<Interval<usize>>,
+    lines: Vec<String>,
+    line_number: bool,
+) {
     for interval in intervals {
         for (line_no, line) in lines
             .iter()
@@ -60,7 +64,10 @@ fn print_results(intervals: Vec<Interval<usize>>, lines: Vec<String>) {
             .take(interval.end + 1)
             .skip(interval.start)
         {
-            println!("{}: {}", line_no + 1, line)
+            if line_number {
+                print!("{}: ", line_no + 1);
+            }
+            println!("{}", line);
         }
     }
 }
@@ -69,37 +76,54 @@ fn read_file(file: impl Read) -> Vec<String> {
     BufReader::new(file).lines().map_while(Result::ok).collect()
 }
 
+#[derive(Parser)]
+#[command(version, about, long_about = None)]
+struct Cli {
+    /// Prefix each line of output with the 1-based line number within its
+    /// input file.
+    #[arg(short, long, default_value_t = false)]
+    line_number: bool,
+
+    /// Print num lines of trailing context before matching lines.
+    #[arg(short, long, default_value_t = 0, value_name = "num")]
+    before_context: u8,
+
+    /// Print num lines of trailing context after matching lines.
+    #[arg(short, long, default_value_t = 0, value_name = "num")]
+    after_context: u8,
+
+    /// The regular expression to match.
+    #[arg(required = true)]
+    pattern: String,
+
+    /// List of files to search.
+    #[arg(required = true)]
+    files: Vec<PathBuf>,
+}
+
+// Result from a thread
+struct RustleSuccess {
+    intervals: Vec<Interval<usize>>,
+    lines: Vec<String>,
+}
+
+// Result from a failed thread
+struct RustleFailure {
+    error: String,
+}
+
 fn main() {
-    let poem = "I have a little shadow that goes in and out with me,
-                And what can be the use of him is more than I can see.
-                He is very, very like me from the heels up to the head;
-                And I see him jump before me, when I jump into my bed.
+    let cli = Cli::parse();
 
-                The funniest thing about him is the way he likes to grow -
-                Not at all like proper children, which is always very slow;
-                For he sometimes shoots up taller like an india-rubber ball,
-                And he sometimes gets so little that there’s none of him at all.";
-
-    let mock_file = std::io::Cursor::new(poem);
-
-    // command line arguments
-    let pattern = "(all)|(little)";
-    let before_context = 1;
-    let after_context = 1;
-
-    // attempt to open the file
-    let lines = read_file(mock_file);
-    //let lines = match File::open(filename) {
-    //    // convert the poem into lines
-    //    Ok(file) => read_file(file),
-    //    Err(e) => {
-    //        eprintln!("Error opening {filename}: {e}");
-    //        exit(1);
-    //    }
-    //};
+    // get values from clap
+    let pattern = cli.pattern;
+    let line_number = cli.line_number;
+    let before_context = cli.before_context as usize;
+    let after_context = cli.after_context as usize;
+    let files = cli.files;
 
     // compile the regular expression
-    let regex = match Regex::new(pattern) {
+    let regex = match Regex::new(&pattern) {
         Ok(re) => re, // bind re to regex
         Err(e) => {
             eprintln!("{e}"); // write to standard error
@@ -107,24 +131,78 @@ fn main() {
         }
     };
 
-    // store the 0-based line number for any matched line
-    let match_lines = find_matching_lines(&lines, regex);
+    thread::scope(|s| {
+        let handles: Vec<_> = files
+            .iter()
+            .map(|file| {
+                let filename = match file.to_str() {
+                    Some(filename) => filename,
+                    None => {
+                        return Err(RustleFailure {
+                            error: format!(
+                                "Invalid filename: {}",
+                                file.display()
+                            ),
+                        })
+                    }
+                };
 
-    // create intervals of the form [a,b] with the before/after context
-    let intervals =
-        match create_intervals(match_lines, before_context, after_context) {
-            Ok(intervals) => intervals,
-            Err(_) => {
-                eprintln!("An error occurred while creating intervals");
-                exit(1);
-            }
-        };
+                // attempt to open the file
+                File::open(filename).map_err(|e| RustleFailure {
+                    error: format!("Error opening {filename}: {e}"),
+                })
+            })
+            .map_ok(|file| {
+                // only spawn a thread for accessible file
+                s.spawn(|| {
+                    let lines = read_file(file);
 
-    // merge overlapping intervals
-    let intervals = merge_intervals(intervals);
+                    // store the 0-based line number for any matched line
+                    let match_lines = find_matching_lines(&lines, &regex);
 
-    // print the lines
-    print_results(intervals, lines);
+                    // create intervals of the form [a,b] with the before/after context
+                    let intervals = match create_intervals(
+                        match_lines,
+                        before_context,
+                        after_context,
+                    ) {
+                        Ok(intervals) => intervals,
+                        Err(_) => return Err(RustleFailure {
+                            error: String::from(
+                                "An error occurred while creating intervals",
+                            ),
+                        }),
+                    };
+
+                    // merge overlapping intervals
+                    let intervals = merge_intervals(intervals);
+                    Ok(RustleSuccess { intervals, lines })
+                })
+            })
+            .collect();
+
+        // process all the results
+        for handle in handles {
+            let result = match handle {
+                Ok(scoped_join_handle) => scoped_join_handle,
+                Err(e) => {
+                    eprintln!("{}", e.error);
+                    continue;
+                }
+            };
+
+            if let Ok(result) = result.join() {
+                match result {
+                    Ok(result) => print_results(
+                        result.intervals,
+                        result.lines,
+                        line_number,
+                    ),
+                    Err(e) => eprintln!("{}", e.error),
+                };
+            };
+        }
+    });
 }
 
 pub mod interval {
@@ -252,6 +330,5 @@ pub mod interval {
 }
 ````
 
-# Next
-
-Let's shift our focus to attributes!
+> You can find the final version of the rustle program we built together during
+> this course [here](https://github.com/freddiehaddad/rustle).

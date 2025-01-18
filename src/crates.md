@@ -1,7 +1,7 @@
 # Crates
 
 Crates are the smallest units of code that the Rust compiler processes at a
-time. For instance, the grep program we're developing is recognized as a crate
+time. For instance, the rustle program we're developing is recognized as a crate
 by the Rust compiler.
 
 ## Types of Crates

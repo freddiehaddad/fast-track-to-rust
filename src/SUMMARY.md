@@ -1,6 +1,6 @@
 # Summary
 
-- [Introduction](introduction.md)
+- [Introduction](index.md)
   - [Shortcuts](shortcuts.md)
   - [Installation](installation.md)
   - [Rust Playground](rust_playground.md)
@@ -40,12 +40,11 @@
 - [Generic Types](generic_types.md)
   - [Interval](interval.md)
   - [Traits](traits.md)
-  - [Grep](grep.md)
 - [Attributes](attributes.md)
   - [Command Line Arguments](clap.md)
 - [Concurrency](concurrency.md)
   - [Non-scoped Threads](non-scoped_threads.md)
   - [Scoped Threads](scoped_threads.md)
-  - [Multithreaded Grep](multithreaded_grep.md)
+  - [Multithreaded Rustle](multithreaded_rustle.md)
 - [Conclusion](conclusion.md)
-  - [Final Grep](final_grep.md)
+  - [Rustle](rustle.md)

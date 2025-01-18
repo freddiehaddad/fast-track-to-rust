@@ -11,7 +11,7 @@ files. For instance, our `Interval` would be placed in a new file called
 `interval.rs`.
 
 ```console
-grep
+rustle
 ├─ Cargo.lock
 ├─ Cargo.toml
 └─ src

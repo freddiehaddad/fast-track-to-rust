@@ -30,7 +30,7 @@ declared within, while an `OuterAttribute` applies to whatever follows it.
 
 ## Inner Attributes
 
-For example, in our grep program, we've used the inner attribute
+For example, in our rustle program, we've used the inner attribute
 `#![allow(unused_imports)]`. By default, the Rust compiler issues warnings if
 your program imports packages via `use` but doesn't actually utilize them. Our
 program imports the `File` module with `use std::fs::File;`, but since we are

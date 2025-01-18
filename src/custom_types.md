@@ -9,7 +9,7 @@ groups.
 
 > We've already encountered enums when we looked at `Option` and `Result`.
 
-In our current grep program, we use tuples to represent intervals. In this
+In our current rustle program, we use tuples to represent intervals. In this
 section, we’ll replace tuples with a custom `Interval` type using a [`struct`],
 and enhance it by adding methods for various operations. Finally, we’ll define
 an [`enum`] to represent potential error values when creating and interacting

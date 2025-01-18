@@ -8,7 +8,7 @@ familiar with.
 
 ## Storing our Lines in a Vector
 
-Let's populate a vector with the input we've been using so far in our grep
+Let's populate a vector with the input we've been using so far in our rustle
 program. There are several ways to create a vector, and the [documentation]
 provides plenty of examples. We'll explore a few of them.
 
@@ -328,7 +328,7 @@ With our intervals merged, we can now print out the results correctly!
 
 ## We Did It!
 
-We have a working grep program! Take some time to review everything we've
+We have a working rustle program! Take some time to review everything we've
 covered so far. The rest of the course is going to move quickly.
 
 # Summary

@@ -55,7 +55,7 @@ impl Interval {
 
 ## Methods
 
-Recall from our grep program that we merged overlapping intervals to prevent
+Recall from our rustle program that we merged overlapping intervals to prevent
 printing the same line multiple times. It would be useful to create a method to
 check if two intervals overlap and another method to merge overlapping
 intervals. Let's outline these methods!
@@ -87,7 +87,7 @@ this parameter. Depending on the intended behavior, it can be specified as
 
 ## Implementing the Methods
 
-Remember that our grep program processes lines sequentially. This allows us to
+Remember that our rustle program processes lines sequentially. This allows us to
 optimize the detection of overlapping intervals. However, this approach limits
 the versatility of our `Interval` type. As an exercise, you can work on making
 it more generic.
@@ -182,9 +182,9 @@ fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
 > NOTE: Because the iterator consumes the data, the vector cannot be used
 > afterward.
 
-## Updating Grep
+## Updating Rustle
 
-It's time to update our Grep program to utilize our new type. Additionally, a
+It's time to update our rustle program to utilize our new type. Additionally, a
 few minor changes have been made to enhance the design, demonstrate some
 additional language features, and leverage move semantics. Give the program a
 run!
@@ -330,7 +330,7 @@ impl Interval {
 
 ## Summarizing the Changes
 
-Our grep program now makes use of our custom type and includes a few other
+Our rustle program now makes use of our custom type and includes a few other
 enhancements.
 
 Let's review the changes:

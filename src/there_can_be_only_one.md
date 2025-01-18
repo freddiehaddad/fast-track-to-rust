@@ -1,8 +1,8 @@
 # There Can Be Only One
 
-Currently, our entire grep program is contained within the `main` function. This
-approach was chosen to address the challenges of teaching a course in a way that
-introduces important concepts logically and in an easily digestible manner.
+Currently, our entire rustle program is contained within the `main` function.
+This approach was chosen to address the challenges of teaching a course in a way
+that introduces important concepts logically and in an easily digestible manner.
 However, the time has come to refactor some of the code from the `main` function
 into separate functions.
 

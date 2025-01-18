@@ -3,7 +3,7 @@
 Rust includes the primitive types,[^1] statements, and expressions[^2] you're
 already familiar with. However, it also incorporates some powerful concepts from
 functional languages that we will explore throughout this course. To begin with
-our grep program, we'll keep things simple and gradually refactor the code to
+our rustle program, we'll keep things simple and gradually refactor the code to
 introduce more of what Rust has to offer. Let's start with variables.
 
 ---

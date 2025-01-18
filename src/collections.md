@@ -12,9 +12,9 @@ The collections are commonly grouped into four categories:
 - Sets: [HashSet], [BTreeSet]
 - Misc: [BinaryHeap]
 
-## Grep
+## Rustle
 
-Currently, our grep program only outputs the line number and the matching line
+Currently, our rustle program only outputs the line number and the matching line
 for each pattern match. It doesn't yet support printing lines before or after
 the match. So far, we haven't had a straightforward way to implement this
 functionality, and there are several challenges we need to address.
@@ -59,8 +59,8 @@ would end up with the following output:
 9: And he sometimes gets so little that there’s none of him at all.
 ```
 
-This is not the behavior we want from our grep program. Instead, we aim for the
-following output:
+This is not the behavior we want from our rustle program. Instead, we aim for
+the following output:
 
 ```text
 1: I have a little shadow that goes in and out with me,

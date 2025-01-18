@@ -10,7 +10,7 @@ mod interval {
 }
 ```
 
-Here's the new version of our grep program with the `Interval` related parts
+Here's the new version of our rustle program with the `Interval` related parts
 moved inside the `interval` module. In addition, comments have been added to the
 module which will be used to generate documentation in an upcoming section. Go
 ahead and run the code to see it in action!
@@ -1194,7 +1194,7 @@ with Packages, Crates, and Modules] will be extremely valuable.
 - **Advanced**: Creating an external crate
   1. Create a library crate `cargo new --lib interval` and move the interval
      code into it.
-  1. If you haven't already, create a binary crate `cargo new grep` and update
+  1. If you haven't already, create a binary crate `cargo new rustle` and update
      the `Cargo.toml` file to use the external crate from the previous step.
      Refer to the section on [Specifying Dependencies] in [The Cargo Book] for
      guidance.

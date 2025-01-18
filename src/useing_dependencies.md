@@ -5,7 +5,7 @@ Now that we've added the `regex` crate as a dependency, we are ready to _use_ it
 (crate::module) or, more commonly, by bringing the module into scope with the
 `use`[^1] keyword.
 
-We've been doing this in our grep program:
+We've been doing this in our rustle program:
 
 ```rust,noplayground
 use std::fs::File;
