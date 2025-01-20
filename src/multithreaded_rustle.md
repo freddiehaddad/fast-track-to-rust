@@ -445,12 +445,12 @@ instead of moved.
 
 # Exercise
 
-The current multithreaded implementation is suboptimal because results are
-printed synchronously. This means if thread two finishes before thread one, its
-results won't be printed until thread one completes. Rust offers a
-multi-producer, single-consumer FIFO queue ([`mpsc`] channel), which allows
-results to be sent asynchronously as threads finish. Modify the code to use this
-module.
+The fork/join model implemented is suboptimal because it waits for all threads
+to finish and join before printing any results. To address this, we can use the
+[`mpsc`] (multiple producer, single consumer) module, which allows threads to
+send results to a central receiver as soon as they are ready. This enables the
+program to start outputting results immediately, enhancing its responsiveness
+and efficiency. Modify the program to make use of `mpsc`.
 
 **HINT**: The final solution should have a structure similar to:
 
