@@ -140,9 +140,9 @@ match x {
 
 ```text
 match VALUE {
-    PATTERN = EXPRESSION,
-    PATTERN = EXPRESSION,
-    PATTERN = EXPRESSION,
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
 }
 ```
 
