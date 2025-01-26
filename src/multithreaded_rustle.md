@@ -154,8 +154,8 @@ And he sometimes gets so little that there's none of him at all.",
         (
             "scoped_threads.txt",
             "When we work with scoped threads, the compiler can clearly see,
-if the variables we want to use will be avilable to me.
-Because of this visiblity, I'm runtime error free!
+if the variables we want to use will be available to me.
+Because of this visibility, I'm runtime error free!
 And issues in my code will be exposed by rustc.
 If this sort of safety is provided at native speeds,
 there's simply no compelling case to stick with cpp!",
@@ -626,8 +626,8 @@ And he sometimes gets so little that there's none of him at all.",
         (
             "scoped_threads.txt",
             "When we work with scoped threads, the compiler can clearly see,
-if the variables we want to use will be avilable to me.
-Because of this visiblity, I'm runtime error free!
+if the variables we want to use will be available to me.
+Because of this visibility, I'm runtime error free!
 And issues in my code will be exposed by rustc.
 If this sort of safety is provided at native speeds,
 there's simply no compelling case to stick with cpp!",
@@ -1017,8 +1017,8 @@ fn main() {
 #         (
 #             "scoped_threads.txt",
 #             "When we work with scoped threads, the compiler can clearly see,
-# if the variables we want to use will be avilable to me.
-# Because of this visiblity, I'm runtime error free!
+# if the variables we want to use will be available to me.
+# Because of this visibility, I'm runtime error free!
 # And issues in my code will be exposed by rustc.
 # If this sort of safety is provided at native speeds,
 # there's simply no compelling case to stick with cpp!",
