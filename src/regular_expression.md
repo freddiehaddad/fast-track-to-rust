@@ -130,7 +130,7 @@ fn main() {
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
 #

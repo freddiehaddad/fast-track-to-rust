@@ -33,7 +33,7 @@ of the following form:
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
     let mut lines = Vec::new(); // each call to push mutates the vector
     for line in poem.lines() {
@@ -66,7 +66,7 @@ unnecessarily. An idiomatic solution would look like this:
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
     // convert poem into lines
     let lines = Vec::from_iter(poem.lines());
@@ -99,7 +99,7 @@ another vector to hold the line numbers where the pattern was found.
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
     let pattern = "all";
 
@@ -145,7 +145,7 @@ out-of-bounds indexing, we use `saturating_add` and `saturating_sub`.
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let pattern = "all";
     let before_context = 1;
@@ -202,7 +202,7 @@ advantage of the `dedup_by` iterator adaptor to perform the merge.
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let pattern = "all";
 #     let before_context = 1;
@@ -273,7 +273,7 @@ With our intervals merged, we can now print out the results correctly!
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let pattern = "all";
 #     let before_context = 1;

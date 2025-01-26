@@ -7,7 +7,7 @@ feature and to modify how that feature operates. Let's look at how a Rust
 project can be organized.
 
 Paraphrasing the Rust documentation, Rust offers several features to help you
-manage your code’s organization, including which details are exposed, which are
+manage your code's organization, including which details are exposed, which are
 private, and what names are in each scope of your programs. These features,
 often collectively referred to as the module system, include:
 

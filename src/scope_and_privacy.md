@@ -85,7 +85,7 @@ ahead and run the code to see it in action!
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
 #
@@ -328,7 +328,7 @@ use interval::{Interval, IntervalError};
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
 #
@@ -559,7 +559,7 @@ add the `pub` prefix and run the program again.
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
 #
@@ -788,7 +788,7 @@ and hopefully achieve a successful compile!
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
 #
@@ -1014,7 +1014,7 @@ successful compile. Fingers crossed!
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
 #

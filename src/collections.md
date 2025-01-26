@@ -37,7 +37,7 @@ And I see him jump before me, when I jump into my bed.
 The funniest thing about him is the way he likes to grow -
 Not at all like proper children, which is always very slow;
 For he sometimes shoots up taller like an india-rubber ball,
-And he sometimes gets so little that there’s none of him at all.
+And he sometimes gets so little that there's none of him at all.
 ```
 
 If the pattern is "him" and the number of lines to print before each match is
@@ -56,7 +56,7 @@ would end up with the following output:
 6: The funniest thing about him is the way he likes to grow -
 7: Not at all like proper children, which is always very slow;
 8: For he sometimes shoots up taller like an india-rubber ball,
-9: And he sometimes gets so little that there’s none of him at all.
+9: And he sometimes gets so little that there's none of him at all.
 ```
 
 This is not the behavior we want from our rustle program. Instead, we aim for
@@ -71,7 +71,7 @@ the following output:
 6: The funniest thing about him is the way he likes to grow -
 7: Not at all like proper children, which is always very slow;
 8: For he sometimes shoots up taller like an india-rubber ball,
-9: And he sometimes gets so little that there’s none of him at all.
+9: And he sometimes gets so little that there's none of him at all.
 ```
 
 A similar issue arises with `--after-context`. Our solution involves using a

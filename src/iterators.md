@@ -32,7 +32,7 @@ count along with the value from the previous iterator, as tuples[^1] in the form
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
     for (i, line) in poem.lines().enumerate() {
         if line.contains(pattern) {
@@ -58,7 +58,7 @@ return an iterator that includes only the items we want!
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
     for (line_no, line) in
         poem.lines()

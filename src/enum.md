@@ -7,11 +7,11 @@ and can encapsulate values within their variants! [^1]
 
 ## Using an `enum` for Errors
 
-For our rustle program, we’ll create an `enum` to represent possible errors
+For our rustle program, we'll create an `enum` to represent possible errors
 during `Interval` operations. For example, when a user creates an `Interval`,
 the starting value must be less than or equal to the ending value. Additionally,
 if a user wants to merge two intervals, they must overlap. If these conditions
-aren't met, we’ll return an error (`Err`) using one of our `enum` variants.
+aren't met, we'll return an error (`Err`) using one of our `enum` variants.
 
 ## Defining an `enum`
 
@@ -127,7 +127,7 @@ to `coalesce`. Otherwise, the `Err((p, c))` value provided to `or` is returned.
 
 The final change required is in `main`. Since `create_intervals` now returns a
 `Result`, we use a `match` expression to check if the operation was successful.
-In the case of an `Err`, since it’s unrecoverable, we print an error message and
+In the case of an `Err`, since it's unrecoverable, we print an error message and
 exit.
 
 ```rust,noplayground
@@ -217,7 +217,7 @@ fn main() {
 #                 The funniest thing about him is the way he likes to grow -
 #                 Not at all like proper children, which is always very slow;
 #                 For he sometimes shoots up taller like an india-rubber ball,
-#                 And he sometimes gets so little that there’s none of him at all.";
+#                 And he sometimes gets so little that there's none of him at all.";
 #
 #     let mock_file = std::io::Cursor::new(poem);
 #
@@ -315,7 +315,7 @@ robust and flexible way of managing errors such as:
    returning a `Result`, the function gives the caller the option to handle the
    error in a way that makes sense for their specific context, rather than
    immediately terminating the program.
-1. **Type Safety**: Rust’s type system ensures that errors are handled
+1. **Type Safety**: Rust's type system ensures that errors are handled
    correctly. The `Result` type is part of this system, helping to prevent
    common errors like null pointer dereferencing and making the code safer and
    more predictable.
@@ -324,7 +324,7 @@ robust and flexible way of managing errors such as:
    easier to work with collections of results and to propagate errors through
    multiple layers of function calls.
 
-Overall, the use of `Result` aligns with Rust’s goals of safety, concurrency,
+Overall, the use of `Result` aligns with Rust's goals of safety, concurrency,
 and performance, providing a clear and structured way to handle errors.
 
 # Exercise
@@ -416,7 +416,7 @@ fn main() {
                 The funniest thing about him is the way he likes to grow -
                 Not at all like proper children, which is always very slow;
                 For he sometimes shoots up taller like an india-rubber ball,
-                And he sometimes gets so little that there’s none of him at all.";
+                And he sometimes gets so little that there's none of him at all.";
 
     let mock_file = std::io::Cursor::new(poem);
 
@@ -503,7 +503,7 @@ impl Interval {
 
 # Next
 
-With our Interval complete, let’s make it a module!
+With our Interval complete, let's make it a module!
 
 [enum]: https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html
 [enumeration]: https://doc.rust-lang.org/reference/items/enumerations.html
