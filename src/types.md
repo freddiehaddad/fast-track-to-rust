@@ -63,8 +63,8 @@ Here are some additional [primitive types] in Rust:
 | array   | A fixed-size array, denoted `[T; N]`, for the element type, `T`, and the non-negative compile-time constant size, `N`. |
 | `bool`  | The boolean type.                                                                                                      |
 | `char`  | A character type.                                                                                                      |
-| `f32`   | A 32-bit floating-point type (specifically, the “binary32” type defined in IEEE 754-2008).                             |
-| `f64`   | A 64-bit floating-point type (specifically, the “binary64” type defined in IEEE 754-2008).                             |
+| `f32`   | A 32-bit floating-point type (specifically, the "binary32" type defined in IEEE 754-2008).                             |
+| `f64`   | A 64-bit floating-point type (specifically, the "binary64" type defined in IEEE 754-2008).                             |
 | `i8`    | The 8-bit signed integer type.                                                                                         |
 | `i16`   | The 16-bit signed integer type.                                                                                        |
 | `i32`   | The 32-bit signed integer type.                                                                                        |
@@ -95,16 +95,14 @@ These user-defined types allow for more complex and expressive code, enabling
 you to model real-world concepts more effectively. We'll explore these in
 greater depth as we progress through our project.
 
-[`str`]: https://doc.rust-lang.org/std/primitive.str.html
-[primitive types]: https://doc.rust-lang.org/std/index.html#primitives
-[user-defined types]: https://doc.rust-lang.org/reference/types.html
-
----
+______________________________________________________________________
 
 [^1]: We'll explore what borrowing means during the course.
 
 [^2]: `struct` types are analogous to `struct` types in C.
 
-[^3]:
-    The `enum` type is analogous to a data constructor declaration in Haskell,
+[^3]: The `enum` type is analogous to a data constructor declaration in Haskell,
     or a _pick ADT_ in Limbo.
+
+[primitive types]: https://doc.rust-lang.org/std/index.html#primitives
+[user-defined types]: https://doc.rust-lang.org/reference/types.html

@@ -20,7 +20,7 @@ Here's a few examples worth exploring:
 
 Let's dive into multithreading!
 
-[thread]: https://doc.rust-lang.org/std/thread/
 [crossbeam]: https://crates.io/crates/crossbeam
 [rayon]: https://crates.io/crates/rayon
+[thread]: https://doc.rust-lang.org/std/thread/
 [tokio]: https://crates.io/crates/tokio

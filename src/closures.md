@@ -110,9 +110,9 @@ In this section we:
 
 Onward to collections!
 
-[closures]: https://doc.rust-lang.org/book/ch13-01-closures.html
-[`filter_map`]: https://doc.rust-lang.org/std/iter/struct.FilterMap.html
-
----
+______________________________________________________________________
 
 [^1]: Separate `filter` and `map` iterators also exist.
+
+[closures]: https://doc.rust-lang.org/book/ch13-01-closures.html
+[`filter_map`]: https://doc.rust-lang.org/std/iter/struct.FilterMap.html

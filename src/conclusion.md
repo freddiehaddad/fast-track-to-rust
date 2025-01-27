@@ -29,17 +29,14 @@ consistent writing style throughout the book.
 If you find that anything appears to be copied from another source without
 proper accreditation, please start a [discussion on GitHub].
 
-[Office Rust Site]: https://www.rust-lang.org/
-[The Rust Programming Language]: https://doc.rust-lang.org/stable/book/
-[Rust Playground]:
-  https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
-[Rust By Example]: https://doc.rust-lang.org/rust-by-example/
-[The Rust Standard Library]: https://doc.rust-lang.org/std/index.html
-[The Cargo Book]: https://doc.rust-lang.org/cargo/index.html
-[The Rustdoc Book]: https://doc.rust-lang.org/rustdoc/index.html
-[The Rustc Book]: https://doc.rust-lang.org/rustc/index.html
-[Compiler Error Code Index]:
-  https://doc.rust-lang.org/error_codes/error-index.html
-[Learn Rust]: https://www.rust-lang.org/learn
-[discussion on GitHub]:
-  https://github.com/freddiehaddad/fast-track-to-rust/discussions
+[compiler error code index]: https://doc.rust-lang.org/error_codes/error-index.html
+[discussion on github]: https://github.com/freddiehaddad/fast-track-to-rust/discussions
+[learn rust]: https://www.rust-lang.org/learn
+[office rust site]: https://www.rust-lang.org/
+[rust by example]: https://doc.rust-lang.org/rust-by-example/
+[rust playground]: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+[the cargo book]: https://doc.rust-lang.org/cargo/index.html
+[the rust programming language]: https://doc.rust-lang.org/stable/book/
+[the rust standard library]: https://doc.rust-lang.org/std/index.html
+[the rustc book]: https://doc.rust-lang.org/rustc/index.html
+[the rustdoc book]: https://doc.rust-lang.org/rustdoc/index.html

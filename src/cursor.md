@@ -164,7 +164,7 @@ fn main() {
 }
 ```
 
-What? You don't believe me! Give it a whirl and see for yourself! 😄
+What? You don't believe me! Give it a whirl and see for yourself!
 
 > Since we commented out the file handling code, some previously necessary
 > imports are now unused. The `#![allow(unused_imports)]` attribute in Rust
@@ -178,14 +178,13 @@ We're ready to add support for regular expressions for pattern matching. We'll
 take a brief detour to learn about project management in Rust, which will allow
 us to use packages (also known as crates) to add this functionality.
 
-[`Cursor`]: https://doc.rust-lang.org/std/io/struct.Cursor.html
-[`Seek`]: https://doc.rust-lang.org/std/io/trait.Seek.html
-[`Read`]: https://doc.rust-lang.org/std/io/trait.Read.html
-[`Write`]: https://doc.rust-lang.org/std/io/trait.Write.html
-[trait]: https://doc.rust-lang.org/book/ch10-02-traits.html
+______________________________________________________________________
 
----
-
-[^1]:
-    A Cursor wraps an in-memory buffer and provides it with a [`Seek`]
+[^1]: A Cursor wraps an in-memory buffer and provides it with a [`Seek`]
     implementation.
+
+[trait]: https://doc.rust-lang.org/book/ch10-02-traits.html
+[`cursor`]: https://doc.rust-lang.org/std/io/struct.Cursor.html
+[`read`]: https://doc.rust-lang.org/std/io/trait.Read.html
+[`seek`]: https://doc.rust-lang.org/std/io/trait.Seek.html
+[`write`]: https://doc.rust-lang.org/std/io/trait.Write.html

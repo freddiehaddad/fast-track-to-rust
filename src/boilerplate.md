@@ -17,10 +17,10 @@ $ cargo clean
 
 ```console
 .
-├─ Cargo.lock
-├─ Cargo.toml
-└─ src
-   └─ main.rs
++ Cargo.lock
++ Cargo.toml
++ src
+  + main.rs
 ```
 
 For now, we'll focus on `main.rs` and discuss `Cargo.lock` and `Cargo.toml`
@@ -62,16 +62,3 @@ In this section, we:
 
 Let's dive into building our rustle program. We'll start by setting up the basic
 structure and then gradually add more functionality.
-
-[string slice]:
-  https://doc.rust-lang.org/reference/glossary.html?highlight=string%20slice#string-slice
-[macros]: https://doc.rust-lang.org/reference/macros.html?highlight=macro#macros
-
----
-
-[^1]: String literals are actually [string slice]s with type `'static &str`.
-
-[^2]:
-    Macros are custom definitions that extend Rust's functionality and syntax.
-    When invoked, [macros] are expanded at compile time and replaced with their
-    definitions.

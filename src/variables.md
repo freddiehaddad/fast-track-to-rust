@@ -6,7 +6,7 @@ variables, or more precisely, for variable binding.
 
 The anatomy of a `let` statement[^1] [^2]:
 
-```
+```rust,noplayground
 let identifier: type = expression;
 ```
 
@@ -66,13 +66,11 @@ In this section, we:
 
 Onward to control flow.
 
-[`let` statements]:
-  https://doc.rust-lang.org/reference/statements.html#let-statements
+______________________________________________________________________
 
----
-
-[^1]:
-    [`let` statements] support more advanced features that are not being covered
+[^1]: [`let` statements] support more advanced features that are not being covered
     yet.
 
 [^2]: In many cases, the compiler can infer the type allowing you to omit it.
+
+[`let` statements]: https://doc.rust-lang.org/reference/statements.html#let-statements

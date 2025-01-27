@@ -1,6 +1,6 @@
 # Shortcuts
 
-This course, developed with [mdBook], features efficient keyboard shortcuts for
+This course, developed with [mdbook], features efficient keyboard shortcuts for
 streamlined navigation.
 
 ## Keyboard Shortcuts
@@ -10,4 +10,4 @@ streamlined navigation.
 - `s`: Activate the search bar.
 - `Ctrl+Enter`: Execute the code in the focused code block.
 
-[mdBook]: https://github.com/rust-lang/mdBook
+[mdbook]: https://github.com/rust-lang/mdBook

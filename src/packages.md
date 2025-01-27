@@ -8,5 +8,4 @@ a library or binary crate.
 
 Refer to the section on [Packages and Crates] in the Rust documentation.
 
-[Packages and Crates]:
-  https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html#packages-and-crates
+[packages and crates]: https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html#packages-and-crates

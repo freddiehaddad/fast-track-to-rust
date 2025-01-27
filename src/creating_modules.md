@@ -12,11 +12,11 @@ files. For instance, our `Interval` would be placed in a new file called
 
 ```console
 rustle
-├─ Cargo.lock
-├─ Cargo.toml
-└─ src
-   ├─ interval.rs
-   └─ main.rs
++ Cargo.lock
++ Cargo.toml
++ src
+  + interval.rs
+  + main.rs
 ```
 
 > Document generation
@@ -29,6 +29,5 @@ rustle
 
 Let's get started!
 
-[Module Cheat Sheet]:
-  https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html#modules-cheat-sheet
+[module cheat sheet]: https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html#modules-cheat-sheet
 [`rustdoc`]: https://doc.rust-lang.org/rustdoc/index.html

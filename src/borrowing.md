@@ -350,19 +350,15 @@ with Rust:
   immutable references.
 - References must always be valid.
 
-[string slice `str`]: types.md#string-slice-str
-[borrowed pointer type]:
-  https://doc.rust-lang.org/book/appendix-02-operators.html#operators
-[Understanding Ownership]:
-  https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html
-
 # Next
 
 With our new understanding of ownership and borrowing, let's switch our focus to
 error handling.
 
----
+______________________________________________________________________
 
-[^1]:
-    The `&` operator can have different meanings depending on the context. For
+[^1]: The `&` operator can have different meanings depending on the context. For
     example, when used an infix operator, it becomes a bitwise AND.
+
+[string slice `str`]: types.md#string-slice-str
+[understanding ownership]: https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html

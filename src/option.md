@@ -37,14 +37,13 @@ enclosed within the `Some` variant of the `Option` `enum`. If not, we return the
     }
 ```
 
-[`enum`]: https://doc.rust-lang.org/std/keyword.enum.html
-[`Option`]: https://doc.rust-lang.org/std/option/
-[generics]: https://doc.rust-lang.org/rust-by-example/generics.html#generics
+______________________________________________________________________
 
----
-
-[^1]:
-    [`enum`]s in Rust are similar to those of other compiled languages like C,
+[^1]: [`enum`]s in Rust are similar to those of other compiled languages like C,
     but have important differences that make them considerably more powerful.
 
 [^2]: Recall that grep uses 1-based line numbering. `enumerate` begins at 0.
+
+[generics]: https://doc.rust-lang.org/rust-by-example/generics.html#generics
+[`enum`]: https://doc.rust-lang.org/std/keyword.enum.html
+[`option`]: https://doc.rust-lang.org/std/option/

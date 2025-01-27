@@ -18,11 +18,9 @@ Keep these rules about ownership in mind as we progress through the course:
 - There can only be one owner at a time.
 - When the owner goes out of scope, the value is _dropped_.[^1]
 
-[Understanding Ownership]:
-  https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html
+______________________________________________________________________
 
----
-
-[^1]:
-    The term _dropped_ means the memory is freed and the object's lifetime has
+[^1]: The term _dropped_ means the memory is freed and the object's lifetime has
     ended.
+
+[understanding ownership]: https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html

@@ -77,14 +77,11 @@ Whoa! What just happened? We're on the fast track to learning Rust, so we're
 picking up the pace! Let's break this down because this code snippet needs some
 unpacking.
 
-[iterators]:
-  https://doc.rust-lang.org/book/ch13-02-iterators.html#processing-a-series-of-items-with-iterators
-[iterator adaptors]:
-  https://doc.rust-lang.org/book/ch13-02-iterators.html?search=#methods-that-produce-other-iterators
-[tuple]: https://doc.rust-lang.org/rust-by-example/primitives/tuples.html#tuples
+______________________________________________________________________
 
----
-
-[^1]:
-    A [tuple] is a collection of values of different types and is constructed
+[^1]: A [tuple] is a collection of values of different types and is constructed
     using parentheses `()`.
+
+[iterator adaptors]: https://doc.rust-lang.org/book/ch13-02-iterators.html?search=#methods-that-produce-other-iterators
+[iterators]: https://doc.rust-lang.org/book/ch13-02-iterators.html#processing-a-series-of-items-with-iterators
+[tuple]: https://doc.rust-lang.org/rust-by-example/primitives/tuples.html#tuples

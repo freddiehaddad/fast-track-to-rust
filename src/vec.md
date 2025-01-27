@@ -349,23 +349,19 @@ We covered quite a bit in this section:
 
 Let's dive into the concepts of ownership and borrowing.
 
-[documentation]: https://doc.rust-lang.org/std/vec/struct.Vec.html
-[`Vec` source code]: https://doc.rust-lang.org/src/alloc/vec/mod.rs.html
-[397]: https://doc.rust-lang.org/src/alloc/vec/mod.rs.html#397
-[`:?`]: https://doc.rust-lang.org/std/fmt/index.html#fmtdisplay-vs-fmtdebug
-[Inferred type]:
-  https://doc.rust-lang.org/reference/types/inferred.html?highlight=Vec%3C_%3E#inferred-type
-[`dedup_by`]:
-  https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.dedup_by
+______________________________________________________________________
 
----
-
-[^1]:
-    Refer to the [`Vec` source code] see it's full implementation. The `struct`
+[^1]: Refer to the [`Vec` source code] see it's full implementation. The `struct`
     definition is on line [397].
 
 [^2]: The [Inferred type] is part of the type system in Rust.
 
-[^3]:
-    Details about the `Debug` trait can be found
+[^3]: Details about the `Debug` trait can be found
     [here](https://doc.rust-lang.org/std/fmt/trait.Debug.html).
+
+[397]: https://doc.rust-lang.org/src/alloc/vec/mod.rs.html#397
+[documentation]: https://doc.rust-lang.org/std/vec/struct.Vec.html
+[inferred type]: https://doc.rust-lang.org/reference/types/inferred.html?highlight=Vec%3C_%3E#inferred-type
+[`:?`]: https://doc.rust-lang.org/std/fmt/index.html#fmtdisplay-vs-fmtdebug
+[`dedup_by`]: https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.dedup_by
+[`vec` source code]: https://doc.rust-lang.org/src/alloc/vec/mod.rs.html

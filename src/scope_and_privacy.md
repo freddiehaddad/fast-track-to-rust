@@ -1179,8 +1179,9 @@ to your advantage and carefully decide what parts of the API should be made
 public.
 
 Rust goes into great detail with regard to project management. As you create
-your own modules and crates, reviewing the section on [Managing Growing Projects
-with Packages, Crates, and Modules] will be extremely valuable.
+your own modules and crates, reviewing the section on
+[Managing Growing Projects with Packages, Crates, and Modules] will be extremely
+valuable.
 
 # Exercises
 
@@ -1203,14 +1204,13 @@ with Packages, Crates, and Modules] will be extremely valuable.
 
 Now, let's dive into generic types and make our `Interval` generic!
 
-[Visibility and Privacy]:
-  https://doc.rust-lang.org/reference/visibility-and-privacy.html
-[Managing Growing Projects with Packages, Crates, and Modules]:
-  https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html
-[The Cargo Book]: https://doc.rust-lang.org/cargo/
-[Specifying Dependencies]:
-  https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
-
----
+______________________________________________________________________
 
 [^1]: Refer to the [Visibility and Privacy] reference for details.
+
+[e0412]: https://doc.rust-lang.org/stable/error_codes/E0412.html
+[e0433]: https://doc.rust-lang.org/stable/error_codes/E0433.html
+[managing growing projects with packages, crates, and modules]: https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html
+[specifying dependencies]: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
+[the cargo book]: https://doc.rust-lang.org/cargo/
+[visibility and privacy]: https://doc.rust-lang.org/reference/visibility-and-privacy.html

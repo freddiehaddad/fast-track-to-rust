@@ -20,13 +20,11 @@ with `Regex`.
 Now that we know how to add dependencies to our project and use them, it's time
 to add support for regular expressions!
 
-[`use`]: https://doc.rust-lang.org/std/keyword.use.html
-[use declarations]:
-  https://doc.rust-lang.org/reference/items/use-declarations.html
+______________________________________________________________________
 
----
-
-[^1]:
-    The [`use`] keyword can do more than just bring things into scope, so be
+[^1]: The [`use`] keyword can do more than just bring things into scope, so be
     sure to check the documentation on [use declarations] for more details on
     [`use`].
+
+[use declarations]: https://doc.rust-lang.org/reference/items/use-declarations.html
+[`use`]: https://doc.rust-lang.org/std/keyword.use.html

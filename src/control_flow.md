@@ -51,8 +51,8 @@ The purpose of the loop is quite clear: it iterates over each line in the poem.
 You might have already figured it out, but the `match` expression is similar to
 an `if` expression in that it introduces a branch in the code execution.
 However, it has a very powerful feature: when used, the compiler ensures that
-all possible results of the [_scrutinee_] are covered. This aspect of [`match`
-expressions] guarantees that all cases are handled.
+all possible results of the [_scrutinee_] are covered. This aspect of
+[`match` expressions] guarantees that all cases are handled.
 
 Let's ensure we fully understand this. In the code snippet, comment out line 16
 by prefixing it with `//`, and then run the code.
@@ -195,12 +195,8 @@ fn main() {
 
 Take a break if you need, and then let's continue!
 
-[`if`]:
-  https://doc.rust-lang.org/reference/expressions/if-expr.html#if-expressions
-[`if let`]:
-  https://doc.rust-lang.org/reference/expressions/if-expr.html#if-let-expressions
-[loop expressions]:
-  https://doc.rust-lang.org/reference/expressions/loop-expr.html
-[`match` expressions]:
-  https://doc.rust-lang.org/reference/expressions/match-expr.html
+[loop expressions]: https://doc.rust-lang.org/reference/expressions/loop-expr.html
 [_scrutinee_]: https://doc.rust-lang.org/reference/glossary.html#scrutinee
+[`if let`]: https://doc.rust-lang.org/reference/expressions/if-expr.html#if-let-expressions
+[`if`]: https://doc.rust-lang.org/reference/expressions/if-expr.html#if-expressions
+[`match` expressions]: https://doc.rust-lang.org/reference/expressions/match-expr.html

@@ -505,28 +505,21 @@ impl Interval {
 
 With our Interval complete, let's make it a module!
 
-[enum]: https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html
-[enumeration]: https://doc.rust-lang.org/reference/items/enumerations.html
-[enum values]:
-  https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html#enum-values
-[field init shorthand]:
-  https://doc.rust-lang.org/book/ch05-01-defining-structs.html#using-the-field-init-shorthand
-[`FromIterator`]: https://doc.rust-lang.org/std/iter/trait.FromIterator.html
-[Collecting into a `Result`]:
-  https://doc.rust-lang.org/std/result/#collecting-into-result
-[`or`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.or
-[`or_else`]:
-  https://doc.rust-lang.org/std/result/enum.Result.html#method.or_else
-[`map_err`]:
-  https://doc.rust-lang.org/std/result/enum.Result.html#method.map_err
-[`Result`]: https://doc.rust-lang.org/std/result/enum.Result.html
-
----
+______________________________________________________________________
 
 [^1]: Refer to the documentation on [enum values].
 
 [^2]: Refer to the documentation on _[field init shorthand]_ syntax.
 
-[^3]:
-    Refer to the documentation on [Collecting into a `Result`] for detailed
+[^3]: Refer to the documentation on [Collecting into a `Result`] for detailed
     explanation.
+
+[collecting into a `result`]: https://doc.rust-lang.org/std/result/#collecting-into-result
+[enum]: https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html
+[enum values]: https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html#enum-values
+[enumeration]: https://doc.rust-lang.org/reference/items/enumerations.html
+[field init shorthand]: https://doc.rust-lang.org/book/ch05-01-defining-structs.html#using-the-field-init-shorthand
+[`fromiterator`]: https://doc.rust-lang.org/std/iter/trait.FromIterator.html
+[`or_else`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.or_else
+[`or`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.or
+[`result`]: https://doc.rust-lang.org/std/result/enum.Result.html

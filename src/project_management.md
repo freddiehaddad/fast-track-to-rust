@@ -17,10 +17,9 @@ often collectively referred to as the module system, include:
   privacy of paths.
 - **Paths**: A way of naming an item, such as a struct, function, or module.
 
-All the details about managing projects can be found in the [Managing Growing
-Projects with Packages, Crates, and Modules] section of [The Rust Programming
-Language] documentation.
+All the details about managing projects can be found in the
+[Managing Growing Projects with Packages, Crates, and Modules] section of
+[The Rust Programming Language] documentation.
 
-[Managing Growing Projects with Packages, Crates, and Modules]:
-  https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html#managing-growing-projects-with-packages-crates-and-modules
-[The Rust Programming Language]: https://doc.rust-lang.org/book/title-page.html
+[managing growing projects with packages, crates, and modules]: https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html#managing-growing-projects-with-packages-crates-and-modules
+[the rust programming language]: https://doc.rust-lang.org/book/title-page.html

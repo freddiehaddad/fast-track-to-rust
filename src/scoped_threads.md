@@ -73,11 +73,8 @@ Rust compiler to be certain that all borrowed data (in this case, the `error`
 many runtime errors into compile-time errors. Concepts like this facilitate
 fearless concurrency in Rust!
 
+[`join`]: https://doc.rust-lang.org/stable/std/thread/struct.ScopedJoinHandle.html#method.join
+[`scopedjoinhandle`]: https://doc.rust-lang.org/stable/std/thread/struct.ScopedJoinHandle.html
+[`scope`]: https://doc.rust-lang.org/stable/std/thread/struct.Scope.html
 [`scope` function]: https://doc.rust-lang.org/stable/std/thread/fn.scope.html
-[`Scope`]: https://doc.rust-lang.org/stable/std/thread/struct.Scope.html
-[`spawn`]:
-  https://doc.rust-lang.org/stable/std/thread/struct.Scope.html#method.spawn
-[`ScopedJoinHandle`]:
-  https://doc.rust-lang.org/stable/std/thread/struct.ScopedJoinHandle.html
-[`join`]:
-  https://doc.rust-lang.org/stable/std/thread/struct.ScopedJoinHandle.html#method.join
+[`spawn`]: https://doc.rust-lang.org/stable/std/thread/struct.Scope.html#method.spawn

@@ -358,26 +358,21 @@ Let's review the changes:
 > if we had written the loop as `for interval in intervals.iter()`. The former
 > is syntactic sugar for the latter.[^4]
 
-[RFC 430]:
-  https://github.com/rust-lang/rfcs/blob/master/text/0430-finalizing-naming-conventions.md
-[`Itertools`]: https://docs.rs/itertools/latest/itertools
-[`coalesce`]:
-  https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.coalesce
-[`self`]: https://doc.rust-lang.org/std/keyword.self.html
-
----
+______________________________________________________________________
 
 [^1]: Casing conforms to [RFC 430] (C-CASE).
 
-[^2]:
-    Exclusion of `return` is discussed
+[^2]: Exclusion of `return` is discussed
     [here](https://doc.rust-lang.org/std/keyword.return.html).
 
-[^3]:
-    Method syntax is covered in full detail
+[^3]: Method syntax is covered in full detail
     [here](https://doc.rust-lang.org/book/ch05-03-method-syntax.html).
 
-[^4]:
-    Details about consuming collections with `for in` and `into_iter` can be
+[^4]: Details about consuming collections with `for in` and `into_iter` can be
     found
     [here](https://doc.rust-lang.org/rust-by-example/flow_control/for.html).
+
+[rfc 430]: https://github.com/rust-lang/rfcs/blob/master/text/0430-finalizing-naming-conventions.md
+[`coalesce`]: https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.coalesce
+[`itertools`]: https://docs.rs/itertools/latest/itertools
+[`self`]: https://doc.rust-lang.org/std/keyword.self.html

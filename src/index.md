@@ -25,21 +25,18 @@ Enough chit chat, let's get started!
 
 ![Fast Track to Rust Logo](logo.svg)
 
-[grep]: https://www.gnu.org/software/grep/manual/grep.html
-[GNU]: https://www.gnu.org/
-[documentation]: https://doc.rust-lang.org/book/title-page.html
+______________________________________________________________________
 
----
-
-[^1]:
-    The name Rustle was chosen because it's a play on the word "rust" and
+[^1]: The name Rustle was chosen because it's a play on the word "rust" and
     represents the sound of leaves rustling as the program searches through
     data.
 
-[^2]:
-    GNU is an collection of free software commonly used as an operating system.
+[^2]: GNU is an collection of free software commonly used as an operating system.
     The family of operating systems, known as Linux, are built from them.
 
-[^3]:
-    Grep searches one or more input files for lines containing a match to a
+[^3]: Grep searches one or more input files for lines containing a match to a
     specified pattern. By default, grep outputs the matching lines.
+
+[documentation]: https://doc.rust-lang.org/book/title-page.html
+[gnu]: https://www.gnu.org/
+[grep]: https://www.gnu.org/software/grep/manual/grep.html

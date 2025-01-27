@@ -781,8 +781,8 @@ Here are the necessary changes. Review them and run the program again.
 
 Well, that didn't work! Now we have two new compiler errors:
 
-- [E0369]: binary operation `<=` cannot be applied to type `T`
-- [E0507]: cannot move out of `self.start` which is behind a shared reference
+- \[E0369\]: binary operation `<=` cannot be applied to type `T`
+- \[E0507\]: cannot move out of `self.start` which is behind a shared reference
 
 That's okay, because these errors are a perfect segue into trait bounds!
 
@@ -1353,15 +1353,16 @@ pub mod interval {
 
 Let's dive deeper into traits!
 
-[trait bounds]: https://doc.rust-lang.org/reference/trait-bounds.html
-[Rust book]:
-  https://doc.rust-lang.org/book/ch10-02-traits.html#returning-types-that-implement-traits
-[`PartialOrd`]: https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html
-[`Copy`]: https://doc.rust-lang.org/std/marker/trait.Copy.html
-[`CLone`]: https://doc.rust-lang.org/std/clone/trait.Clone.html
+______________________________________________________________________
 
-[^1]:
-    The restrictions we place on the supported types are known as [trait
-    bounds].
+[^1]: The restrictions we place on the supported types are known as
+    [trait bounds].
 
 [^2]: For more information on `impl Trait` syntax, see the [Rust book]
+
+[e0107]: https://doc.rust-lang.org/stable/error_codes/E0107.html
+[rust book]: https://doc.rust-lang.org/book/ch10-02-traits.html#returning-types-that-implement-traits
+[trait bounds]: https://doc.rust-lang.org/reference/trait-bounds.html
+[`clone`]: https://doc.rust-lang.org/std/clone/trait.Clone.html
+[`copy`]: https://doc.rust-lang.org/std/marker/trait.Copy.html
+[`partialord`]: https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html

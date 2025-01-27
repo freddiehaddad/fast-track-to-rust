@@ -38,18 +38,14 @@ Here are some useful links:
 - [The question mark operator]: Useful for propagating errors to the calling
   function.[^1]
 
-[`Option`]: https://doc.rust-lang.org/std/option/enum.Option.html
-[`Result`]: https://doc.rust-lang.org/std/result/enum.Result.html
-[error handling]: https://doc.rust-lang.org/book/ch09-00-error-handling.html
-[Unrecoverable Errors with panic!]:
-  https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html
-[Recoverable Errors with Result]:
-  https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html
-[To panic! or Not to panic!]:
-  https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html
-[The question mark operator]:
-  https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator
-
----
+______________________________________________________________________
 
 [^1]: We'll cover the question mark operator `?` when we refactor the code.
+
+[error handling]: https://doc.rust-lang.org/book/ch09-00-error-handling.html
+[recoverable errors with result]: https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html
+[the question mark operator]: https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator
+[to panic! or not to panic!]: https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html
+[unrecoverable errors with panic!]: https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html
+[`option`]: https://doc.rust-lang.org/std/option/enum.Option.html
+[`result`]: https://doc.rust-lang.org/std/result/enum.Result.html

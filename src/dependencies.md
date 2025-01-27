@@ -12,13 +12,10 @@ We're going to explore a few crates in this course:
   and macros
 - **[clap]**: A simple to use, efficient, and full-featured Command Line
   Argument Parser
-- **[crossbeam]**: A set of tools for concurrent programming
 
-[crates.io]: https://crates.io/
-[package registry]:
-  https://doc.rust-lang.org/cargo/appendix/glossary.html#registry
-[dependencies]: https://doc.rust-lang.org/cargo/guide/dependencies.html
-[regex]: https://crates.io/crates/regex
-[itertools]: https://crates.io/crates/itertools
 [clap]: https://crates.io/crates/clap
-[crossbeam]: https://crates.io/crates/crossbeam
+[crates.io]: https://crates.io/
+[dependencies]: https://doc.rust-lang.org/cargo/guide/dependencies.html
+[itertools]: https://crates.io/crates/itertools
+[package registry]: https://doc.rust-lang.org/cargo/appendix/glossary.html#registry
+[regex]: https://crates.io/crates/regex

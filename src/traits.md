@@ -897,37 +897,32 @@ pub mod interval {
 }
 ````
 
-[Rust By Example]: https://doc.rust-lang.org/rust-by-example/
-[traits]: https://doc.rust-lang.org/rust-by-example/trait.html
-[derive]: https://doc.rust-lang.org/reference/attributes/derive.html
-[attribute]: https://doc.rust-lang.org/reference/attributes.html
-[`PartialOrd`]: https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html
-[`PartialEq`]: https://doc.rust-lang.org/std/cmp/trait.PartialEq.html
-[`Eq`]: https://doc.rust-lang.org/std/cmp/trait.Eq.html
-[`Clone`]: https://doc.rust-lang.org/std/clone/trait.Clone.html
-[`Copy`]: https://doc.rust-lang.org/std/marker/trait.Copy.html
-[`Hash`]: https://doc.rust-lang.org/std/hash/trait.Hash.html
-[`Default`]: https://doc.rust-lang.org/std/default/trait.Default.html
-[`Debug`]: https://doc.rust-lang.org/std/fmt/trait.Debug.html
-[`cmp`]: https://doc.rust-lang.org/std/cmp/index.html
-[`unwrap()`]:
-  https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap
-[Operator Overloading]: https://doc.rust-lang.org/rust-by-example/trait/ops.html
-[`ops`]: https://doc.rust-lang.org/std/ops/index.html
-[`Display`]: https://doc.rust-lang.org/std/fmt/trait.Display.html
-[`ToString`]: https://doc.rust-lang.org/std/string/trait.ToString.html
-[`.to_string()`]:
-  https://doc.rust-lang.org/std/string/trait.ToString.html#tymethod.to_string
-[Validating References with Lifetimes]:
-  https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
-[Rust Programming Language]: https://doc.rust-lang.org/stable/book/
-[Lifetimes]: https://doc.rust-lang.org/rust-by-example/scope/lifetime.html
-
----
+______________________________________________________________________
 
 [^1]: https://doc.rust-lang.org/rust-by-example/trait.html
 
-[^2]:
-    This is a separate topic that you can learn more about in the [Validating
-    References with Lifetimes] section of the [Rust Programming Language] and
-    the [Lifetimes] section of [Rust By Example].
+[^2]: This is a separate topic that you can learn more about in the
+    [Validating References with Lifetimes] section of the
+    [Rust Programming Language] and the [Lifetimes] section of
+    [Rust By Example].
+
+[attribute]: https://doc.rust-lang.org/reference/attributes.html
+[lifetimes]: https://doc.rust-lang.org/rust-by-example/scope/lifetime.html
+[operator overloading]: https://doc.rust-lang.org/rust-by-example/trait/ops.html
+[rust by example]: https://doc.rust-lang.org/rust-by-example/
+[rust programming language]: https://doc.rust-lang.org/stable/book/
+[traits]: https://doc.rust-lang.org/rust-by-example/trait.html
+[validating references with lifetimes]: https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
+[`clone`]: https://doc.rust-lang.org/std/clone/trait.Clone.html
+[`cmp`]: https://doc.rust-lang.org/std/cmp/index.html
+[`copy`]: https://doc.rust-lang.org/std/marker/trait.Copy.html
+[`debug`]: https://doc.rust-lang.org/std/fmt/trait.Debug.html
+[`default`]: https://doc.rust-lang.org/std/default/trait.Default.html
+[`display`]: https://doc.rust-lang.org/std/fmt/trait.Display.html
+[`eq`]: https://doc.rust-lang.org/std/cmp/trait.Eq.html
+[`hash`]: https://doc.rust-lang.org/std/hash/trait.Hash.html
+[`ops`]: https://doc.rust-lang.org/std/ops/index.html
+[`partialeq`]: https://doc.rust-lang.org/std/cmp/trait.PartialEq.html
+[`partialord`]: https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html
+[`tostring`]: https://doc.rust-lang.org/std/string/trait.ToString.html
+[`unwrap()`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap

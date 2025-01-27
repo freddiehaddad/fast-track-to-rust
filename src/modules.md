@@ -9,9 +9,6 @@ public, exposing them for external code to use and depend on.
 Refer to the section on [Defining Modules to Control Scope and Privacy] in the
 Rust documentation.
 
-[Defining Modules to Control Scope and Privacy]:
-  https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html#defining-modules-to-control-scope-and-privacy
-
 # Summary
 
 In this section, we were introduced to:
@@ -24,3 +21,5 @@ In this section, we were introduced to:
 
 With a basic understanding of crates, packages, and modules, let's utilize one
 for regular expression support.
+
+[defining modules to control scope and privacy]: https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html#defining-modules-to-control-scope-and-privacy

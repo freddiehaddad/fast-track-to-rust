@@ -94,10 +94,12 @@ fn read_file(file: File) -> Vec<String> {
 
 1. **`BufReader`**: `BufReader::new(file)` creates a buffered reader from the
    provided `File`. This helps in efficiently reading the file line by line.
+
 1. **`lines()`**: The `lines()` method on `BufReader` returns an iterator over
    the lines in the file. Because reading from a file can file, each line is
    wrapped in a `Result`, which can be either `Ok` (containing the line) or
    `Err` (containing an error).
+
 1. **`map_while(Result::ok)`**: The `map_while` method is used to transform the
    iterator. It applies the `Result::ok` function to each item, which converts
    `Ok(line)` to `Some(line)` and `Err(_)` to `None`. The iteration stops when
@@ -247,29 +249,21 @@ To continue using the Rust Playground, opening an actual file isn't going to
 work. Let's see how we can leverage an in-memory buffer to represent an open
 file.
 
-[`String`]: https://doc.rust-lang.org/rust-by-example/std/str.html
-[`Box`]: https://doc.rust-lang.org/std/boxed/struct.Box.html
-[documentation on the `Box` type]:
-  https://doc.rust-lang.org/book/ch15-01-box.html
-[`todo!()`]: https://doc.rust-lang.org/std/macro.todo.html
-[`unimplemented!()`]: https://doc.rust-lang.org/std/macro.unimplemented.html
-[`BufReader`]: https://doc.rust-lang.org/std/io/struct.BufReader.html
+______________________________________________________________________
 
----
-
-[^1]:
-    Strings are implemented as `Vec<u8>` in Rust. Reference the
+[^1]: Strings are implemented as `Vec<u8>` in Rust. Reference the
     [API](https://doc.rust-lang.org/stable/std/string/index.html) for details.
 
-[^2]:
-    Unfortunately, the Rust Playground doesn't support opening files, so you'll
+[^2]: Unfortunately, the Rust Playground doesn't support opening files, so you'll
     need to run this part of the code on your local machine.
 
-[^3]:
-    Rust offers several useful macros that are handy for developing and
+[^3]: Rust offers several useful macros that are handy for developing and
     prototyping your program. [`todo!()`] is one of them, and another is
     [`unimplemented!()`].
 
-[^4]:
-    Unlike many object-oriented programming languages that use `this`, Rust uses
-    `self`.
+[documentation on the `box` type]: https://doc.rust-lang.org/book/ch15-01-box.html
+[`box`]: https://doc.rust-lang.org/std/boxed/struct.Box.html
+[`bufreader`]: https://doc.rust-lang.org/std/io/struct.BufReader.html
+[`string`]: https://doc.rust-lang.org/rust-by-example/std/str.html
+[`todo!()`]: https://doc.rust-lang.org/std/macro.todo.html
+[`unimplemented!()`]: https://doc.rust-lang.org/std/macro.unimplemented.html

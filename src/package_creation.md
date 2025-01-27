@@ -23,7 +23,6 @@ If the above commands worked, you're ready to go!
 
    ```console
    $ cargo new rustle
-   ∙
        Creating binary (application) `rustle` package
    note: see more `Cargo.toml` keys and their definitions at
    https://doc.rust-lang.org/cargo/reference/manifest.html

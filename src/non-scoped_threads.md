@@ -128,23 +128,19 @@ Now that we understand why the traditional fork/join model, which works in many
 other languages, is likely to fail in Rust, let's explore how to correctly
 implement this approach!
 
-[thread]: https://doc.rust-lang.org/std/thread/
-[spawn]: https://doc.rust-lang.org/stable/std/thread/fn.spawn.html
-[`JoinHandle`]:
-  https://doc.rust-lang.org/stable/std/thread/struct.JoinHandle.html
-[`join`]:
-  https://doc.rust-lang.org/stable/std/thread/struct.JoinHandle.html#method.join
-[`move`]: https://doc.rust-lang.org/std/keyword.move.html
-[fearless concurrency]:
-  https://doc.rust-lang.org/book/ch16-00-concurrency.html#fearless-concurrency
+______________________________________________________________________
 
----
-
-[^1]:
-    Lifetimes are another type of generic. However, instead of ensuring that a
+[^1]: Lifetimes are another type of generic. However, instead of ensuring that a
     type has the desired behavior, they ensure that references remain valid for
     the desired duration.
 
-[^2]:
-    `move` converts any variables captured by reference or mutable reference to
+[^2]: `move` converts any variables captured by reference or mutable reference to
     variables captured by value.
+
+[e0373]: https://doc.rust-lang.org/stable/error_codes/E0373.html
+[fearless concurrency]: https://doc.rust-lang.org/book/ch16-00-concurrency.html#fearless-concurrency
+[spawn]: https://doc.rust-lang.org/stable/std/thread/fn.spawn.html
+[thread]: https://doc.rust-lang.org/std/thread/
+[`joinhandle`]: https://doc.rust-lang.org/stable/std/thread/struct.JoinHandle.html
+[`join`]: https://doc.rust-lang.org/stable/std/thread/struct.JoinHandle.html#method.join
+[`move`]: https://doc.rust-lang.org/std/keyword.move.html

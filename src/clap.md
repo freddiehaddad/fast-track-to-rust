@@ -380,12 +380,10 @@ be straightforward by now, so we'll focus on the new aspects:
 
 Onward to concurrency!
 
-[`Cargo.toml`]: cargo_toml.md
-[`clap`]: https://crates.io/crates/clap
-[macro attributes]:
-  https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros
-[derive macro helper attributes]:
-  https://doc.rust-lang.org/reference/procedural-macros.html#derive-macro-helper-attributes
+[derive macro helper attributes]: https://doc.rust-lang.org/reference/procedural-macros.html#derive-macro-helper-attributes
 [documentation]: https://crates.io/crates/clap
-[`Pathbuf`]: https://doc.rust-lang.org/std/path/struct.PathBuf.html
+[macro attributes]: https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros
 [`as`]: https://doc.rust-lang.org/std/keyword.as.html
+[`cargo.toml`]: cargo_toml.md
+[`clap`]: https://crates.io/crates/clap
+[`pathbuf`]: https://doc.rust-lang.org/std/path/struct.PathBuf.html

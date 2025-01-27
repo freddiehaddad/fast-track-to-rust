@@ -49,14 +49,11 @@ We're going to explore cases where immutability is needed and appropriate.
 However, let's see how iterators can be used to avoid the need for a mutable
 counter.
 
-[variables and mutability]:
-  https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html
-[diagnostic structure]:
-  https://rustc-dev-guide.rust-lang.org/diagnostics.html#diagnostic-structure
+______________________________________________________________________
 
----
+[^1]: A lot of effort has been put into making `rustc` have great error messages.
+    To help understand how to interpret them, refer to the
+    [diagnostic structure] in the documentation.
 
-[^1]:
-    A lot of effort has been put into making `rustc` have great error messages.
-    To help understand how to interpret them, refer to the [diagnostic
-    structure] in the documentation.
+[diagnostic structure]: https://rustc-dev-guide.rust-lang.org/diagnostics.html#diagnostic-structure
+[variables and mutability]: https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html

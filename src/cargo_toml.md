@@ -90,19 +90,18 @@ regex = "1.11.1"
 
 </details>
 
-[SemVer]: https://semver.org/
-[specifying dependencies]:
-  https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies
+______________________________________________________________________
 
-[^1]:
-    Semantic version numbers (i.e. [SemVer]) are supported. Refer to the
+[^1]: Semantic version numbers (i.e. [SemVer]) are supported. Refer to the
     documentation on [specifying dependencies] for more advanced version
     control.
 
-[^2]:
-    Features of dependencies can be enabled within the dependency declaration.
+[^2]: Features of dependencies can be enabled within the dependency declaration.
     The features key indicates which features to enable. The
     [Cargo Book](https://doc.rust-lang.org/cargo/index.html) covers this under
     the
     [Dependency features](https://doc.rust-lang.org/cargo/reference/features.html#dependency-features)
     section.
+
+[semver]: https://semver.org/
+[specifying dependencies]: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies

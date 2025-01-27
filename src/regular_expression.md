@@ -186,16 +186,13 @@ to the variable `regex`.
 
 Onward to creating our own module!
 
-[Recoverable Errors with Result]:
-  https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#recoverable-errors-with-result
+______________________________________________________________________
 
----
-
-[^1]:
-    The `Regex` crate includes excellent
+[^1]: The `Regex` crate includes excellent
     [documentation](https://docs.rs/regex/latest/regex/) and detailed
     [examples](https://docs.rs/regex/latest/regex/#examples) to learn from.
 
-[^2]:
-    The source code for `new` can be found
+[^2]: The source code for `new` can be found
     [here](https://docs.rs/regex/latest/src/regex/regex/string.rs.html#180-182).
+
+[recoverable errors with result]: https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#recoverable-errors-with-result

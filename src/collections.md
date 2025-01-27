@@ -95,14 +95,12 @@ again, a vector will be useful!
 
 Let's start coding!
 
+[binaryheap]: https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html
+[btreemap]: https://doc.rust-lang.org/std/collections/struct.BTreeMap.html
+[btreeset]: https://doc.rust-lang.org/std/collections/struct.BTreeSet.html
 [collections]: https://doc.rust-lang.org/std/collections/index.html
-[Vec]: https://doc.rust-lang.org/std/vec/struct.Vec.html
-[VecDeque]: https://doc.rust-lang.org/std/collections/struct.VecDeque.html
-[LinkedList]: https://doc.rust-lang.org/std/collections/struct.LinkedList.html
-[HashMap]:
-  https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html
-[BTreeMap]: https://doc.rust-lang.org/std/collections/struct.BTreeMap.html
-[HashSet]:
-  https://doc.rust-lang.org/std/collections/hash_set/struct.HashSet.html
-[BTreeSet]: https://doc.rust-lang.org/std/collections/struct.BTreeSet.html
-[BinaryHeap]: https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html
+[hashmap]: https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html
+[hashset]: https://doc.rust-lang.org/std/collections/hash_set/struct.HashSet.html
+[linkedlist]: https://doc.rust-lang.org/std/collections/struct.LinkedList.html
+[vec]: https://doc.rust-lang.org/std/vec/struct.Vec.html
+[vecdeque]: https://doc.rust-lang.org/std/collections/struct.VecDeque.html

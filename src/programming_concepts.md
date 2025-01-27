@@ -30,8 +30,3 @@ increment with each loop iteration. While this would work, it introduces some of
 the issues that plague languages like C and C++ (e.g., out-of-bounds indexing,
 integer overflow, and more). We'll demonstrate this and follow it up with a more
 idiomatic approach. Let's get going!
-
-[crates]:
-  https://doc.rust-lang.org/reference/glossary.html?highlight=crate#crate
-[standard library]: https://doc.rust-lang.org/std/index.html
-[traits]: https://doc.rust-lang.org/reference/items/traits.html

@@ -1256,5 +1256,5 @@ fn main() {
 
 Wrapping things up!
 
-[`HashMap`]: https://doc.rust-lang.org/std/collections/struct.HashMap.html
+[`hashmap`]: https://doc.rust-lang.org/std/collections/struct.HashMap.html
 [`mpsc`]: https://doc.rust-lang.org/std/sync/mpsc/index.html

@@ -69,20 +69,16 @@ encouraged to explore it for a comprehensive understanding of their uses.
 Additionally, [Rust By Example] offers extra material and illustrates various
 [use cases].
 
-[attributes]: https://doc.rust-lang.org/reference/attributes.html
-[Built-in attributes]:
-  https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index
-[Macro attributes]:
-  https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros
-[Derive macro helper attributes]:
-  https://doc.rust-lang.org/reference/procedural-macros.html#derive-macro-helper-attributes
-[Tool attributes]:
-  https://doc.rust-lang.org/reference/attributes.html#tool-attributes
-[The Rust Reference]: https://doc.rust-lang.org/reference/
-[Rust By Example]: https://doc.rust-lang.org/rust-by-example/
-[use cases]: https://doc.rust-lang.org/rust-by-example/attribute.html
-
 # Next
 
 Attributes offer even greater utility, which we'll explore through command line
 argument parsing!
+
+[attributes]: https://doc.rust-lang.org/reference/attributes.html
+[built-in attributes]: https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index
+[derive macro helper attributes]: https://doc.rust-lang.org/reference/procedural-macros.html#derive-macro-helper-attributes
+[macro attributes]: https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros
+[rust by example]: https://doc.rust-lang.org/rust-by-example/
+[the rust reference]: https://doc.rust-lang.org/reference/
+[tool attributes]: https://doc.rust-lang.org/reference/attributes.html#tool-attributes
+[use cases]: https://doc.rust-lang.org/rust-by-example/attribute.html
