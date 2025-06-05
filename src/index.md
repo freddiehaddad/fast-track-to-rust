@@ -1,7 +1,7 @@
 # Welcome to Fast Track to Rust
 
 This course is designed to introduce you to the Rust programming language by
-building an actual program,. We'll be developing a grep-like program, called
+building an actual program. We'll be developing a grep-like program, called
 rustle[^1] with a minimal subset of the features found in the [GNU] [^2] [grep]
 [^3] utility. This means we'll start with what we know and iterate upon the
 design as we learn more about the language.
