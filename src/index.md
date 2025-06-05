@@ -25,8 +25,6 @@ Enough chit chat, let's get started!
 
 ![Fast Track to Rust Logo](logo.svg)
 
-______________________________________________________________________
-
 [^1]: The name Rustle was chosen because it's a play on the word "rust" and
     represents the sound of leaves rustling as the program searches through
     data.

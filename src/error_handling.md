@@ -38,8 +38,6 @@ Here are some useful links:
 - [The question mark operator]: Useful for propagating errors to the calling
   function.[^1]
 
-______________________________________________________________________
-
 [^1]: We'll cover the question mark operator `?` when we refactor the code.
 
 [error handling]: https://doc.rust-lang.org/book/ch09-00-error-handling.html

@@ -186,8 +186,6 @@ to the variable `regex`.
 
 Onward to creating our own module!
 
-______________________________________________________________________
-
 [^1]: The `Regex` crate includes excellent
     [documentation](https://docs.rs/regex/latest/regex/) and detailed
     [examples](https://docs.rs/regex/latest/regex/#examples) to learn from.

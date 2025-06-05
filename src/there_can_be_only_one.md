@@ -161,8 +161,6 @@ compiler generates the message "value borrowed here after move".
 > buffer overflows, and use-after-free, during compile time, thereby preventing
 > them from happening at runtime.
 
-______________________________________________________________________
-
 [^1]: There are some exceptions in Rust. For example, most primitive types
     implement the [`Copy`] trait.
 

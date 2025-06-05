@@ -1204,8 +1204,6 @@ valuable.
 
 Now, let's dive into generic types and make our `Interval` generic!
 
-______________________________________________________________________
-
 [^1]: Refer to the [Visibility and Privacy] reference for details.
 
 [e0412]: https://doc.rust-lang.org/stable/error_codes/E0412.html

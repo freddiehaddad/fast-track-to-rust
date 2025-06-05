@@ -128,8 +128,6 @@ Now that we understand why the traditional fork/join model, which works in many
 other languages, is likely to fail in Rust, let's explore how to correctly
 implement this approach!
 
-______________________________________________________________________
-
 [^1]: Lifetimes are another type of generic. However, instead of ensuring that a
     type has the desired behavior, they ensure that references remain valid for
     the desired duration.

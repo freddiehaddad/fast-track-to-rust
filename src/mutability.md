@@ -49,8 +49,6 @@ We're going to explore cases where immutability is needed and appropriate.
 However, let's see how iterators can be used to avoid the need for a mutable
 counter.
 
-______________________________________________________________________
-
 [^1]: A lot of effort has been put into making `rustc` have great error messages.
     To help understand how to interpret them, refer to the
     [diagnostic structure] in the documentation.

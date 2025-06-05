@@ -77,8 +77,6 @@ Whoa! What just happened? We're on the fast track to learning Rust, so we're
 picking up the pace! Let's break this down because this code snippet needs some
 unpacking.
 
-______________________________________________________________________
-
 [^1]: A [tuple] is a collection of values of different types and is constructed
     using parentheses `()`.
 

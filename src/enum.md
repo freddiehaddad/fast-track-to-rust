@@ -505,8 +505,6 @@ impl Interval {
 
 With our Interval complete, let's make it a module!
 
-______________________________________________________________________
-
 [^1]: Refer to the documentation on [enum values].
 
 [^2]: Refer to the documentation on _[field init shorthand]_ syntax.

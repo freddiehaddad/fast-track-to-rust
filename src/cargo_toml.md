@@ -90,8 +90,6 @@ regex = "1.11.1"
 
 </details>
 
-______________________________________________________________________
-
 [^1]: Semantic version numbers (i.e. [SemVer]) are supported. Refer to the
     documentation on [specifying dependencies] for more advanced version
     control.

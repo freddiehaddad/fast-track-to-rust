@@ -355,8 +355,6 @@ with Rust:
 With our new understanding of ownership and borrowing, let's switch our focus to
 error handling.
 
-______________________________________________________________________
-
 [^1]: The `&` operator can have different meanings depending on the context. For
     example, when used an infix operator, it becomes a bitwise AND.
 

@@ -1353,8 +1353,6 @@ pub mod interval {
 
 Let's dive deeper into traits!
 
-______________________________________________________________________
-
 [^1]: The restrictions we place on the supported types are known as
     [trait bounds].
 

@@ -349,8 +349,6 @@ We covered quite a bit in this section:
 
 Let's dive into the concepts of ownership and borrowing.
 
-______________________________________________________________________
-
 [^1]: Refer to the [`Vec` source code] see it's full implementation. The `struct`
     definition is on line [397].
 

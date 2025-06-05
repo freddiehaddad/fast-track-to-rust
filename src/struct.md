@@ -358,8 +358,6 @@ Let's review the changes:
 > if we had written the loop as `for interval in intervals.iter()`. The former
 > is syntactic sugar for the latter.[^4]
 
-______________________________________________________________________
-
 [^1]: Casing conforms to [RFC 430] (C-CASE).
 
 [^2]: Exclusion of `return` is discussed
