@@ -178,8 +178,6 @@ We're ready to add support for regular expressions for pattern matching. We'll
 take a brief detour to learn about project management in Rust, which will allow
 us to use packages (also known as crates) to add this functionality.
 
-______________________________________________________________________
-
 [^1]: A Cursor wraps an in-memory buffer and provides it with a [`Seek`]
     implementation.
 

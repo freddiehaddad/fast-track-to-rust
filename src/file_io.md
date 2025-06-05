@@ -249,8 +249,6 @@ To continue using the Rust Playground, opening an actual file isn't going to
 work. Let's see how we can leverage an in-memory buffer to represent an open
 file.
 
-______________________________________________________________________
-
 [^1]: Strings are implemented as `Vec<u8>` in Rust. Reference the
     [API](https://doc.rust-lang.org/stable/std/string/index.html) for details.
 

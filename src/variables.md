@@ -66,8 +66,6 @@ In this section, we:
 
 Onward to control flow.
 
-______________________________________________________________________
-
 [^1]: [`let` statements] support more advanced features that are not being covered
     yet.
 

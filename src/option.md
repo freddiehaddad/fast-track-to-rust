@@ -37,8 +37,6 @@ enclosed within the `Some` variant of the `Option` `enum`. If not, we return the
     }
 ```
 
-______________________________________________________________________
-
 [^1]: [`enum`]s in Rust are similar to those of other compiled languages like C,
     but have important differences that make them considerably more powerful.
 

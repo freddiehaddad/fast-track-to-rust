@@ -897,8 +897,6 @@ pub mod interval {
 }
 ````
 
-______________________________________________________________________
-
 [^1]: https://doc.rust-lang.org/rust-by-example/trait.html
 
 [^2]: This is a separate topic that you can learn more about in the

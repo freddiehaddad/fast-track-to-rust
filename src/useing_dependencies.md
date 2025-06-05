@@ -20,8 +20,6 @@ with `Regex`.
 Now that we know how to add dependencies to our project and use them, it's time
 to add support for regular expressions!
 
-______________________________________________________________________
-
 [^1]: The [`use`] keyword can do more than just bring things into scope, so be
     sure to check the documentation on [use declarations] for more details on
     [`use`].

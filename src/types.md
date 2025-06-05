@@ -95,8 +95,6 @@ These user-defined types allow for more complex and expressive code, enabling
 you to model real-world concepts more effectively. We'll explore these in
 greater depth as we progress through our project.
 
-______________________________________________________________________
-
 [^1]: We'll explore what borrowing means during the course.
 
 [^2]: `struct` types are analogous to `struct` types in C.

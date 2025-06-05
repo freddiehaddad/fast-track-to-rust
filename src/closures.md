@@ -110,8 +110,6 @@ In this section we:
 
 Onward to collections!
 
-______________________________________________________________________
-
 [^1]: Separate `filter` and `map` iterators also exist.
 
 [closures]: https://doc.rust-lang.org/book/ch13-01-closures.html
