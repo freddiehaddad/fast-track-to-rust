@@ -10,7 +10,7 @@ full details and comprehension.
 
 ## Rustle Features
 
-Rustle is a fairly large program with numerous features. In this course, we
+Grep is a fairly large program with numerous features. In this course, we
 won't be implementing all of them. Instead, we'll concentrate on a subset of
 features (with slight variations in behavior) that will help you learn Rust. The
 features we'll be implementing are:
