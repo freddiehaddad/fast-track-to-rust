@@ -1,7 +1,6 @@
 [book]
 authors = ["Freddie Haddad"]
 language = "en"
-multilingual = false
 src = "src"
 title = "Fast Track to Rust"
 description = "A course designed to get you going in Rust fast!"
@@ -9,7 +8,6 @@ description = "A course designed to get you going in Rust fast!"
 [output.html]
 default-theme = "rust"
 git-repository-url = "https://github.com/freddiehaddad/fast-track-to-rust"
-git-repository-icon = "fa-github"
 
 [output.html.playground]
 editable = true
