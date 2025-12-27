@@ -12,7 +12,7 @@ Here are some resources used throughout this course, listed alphabetically:
 - [The Cargo Book]
 - [Compiler Error Code Index]
 - [Learn Rust]
-- [Office Rust Site]
+- [Official Rust Site]
 - [Rust By Example]
 - [Rust Playground]
 - [The Rust Programming Language]
@@ -32,7 +32,7 @@ proper accreditation, please start a [discussion on GitHub].
 [compiler error code index]: https://doc.rust-lang.org/error_codes/error-index.html
 [discussion on github]: https://github.com/freddiehaddad/fast-track-to-rust/discussions
 [learn rust]: https://www.rust-lang.org/learn
-[office rust site]: https://www.rust-lang.org/
+[official rust site]: https://www.rust-lang.org/
 [rust by example]: https://doc.rust-lang.org/rust-by-example/
 [rust playground]: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
 [the cargo book]: https://doc.rust-lang.org/cargo/index.html

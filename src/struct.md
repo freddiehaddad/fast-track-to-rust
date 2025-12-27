@@ -153,7 +153,7 @@ fn merge_intervals(intervals: Vec<Interval>) -> Vec<Interval> {
 While functionally correct, Rust features powerful crates that can make
 implementing this behavior more concise. One such crate is [`Itertools`], which
 provides extra iterator adaptors. To use this crate, specify it as a dependency
-in `Crates.toml` and include it in `main.rs` with `use itertools::Itertools`.
+in `Cargo.toml` and include it in `main.rs` with `use itertools::Itertools`.
 Let's see how the [`coalesce`] adaptor can simplify the code:
 
 ```rust,noplayground

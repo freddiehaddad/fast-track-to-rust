@@ -1,7 +1,7 @@
 # Enum
 
 An _[enumeration]_, commonly known as an _[enum]_, is declared using the keyword
-`enum`. Compared to other languges, enums in Rust offer greater flexibility and
+`enum`. Compared to other languages, enums in Rust offer greater flexibility and
 power. For instance, they support generics (as seen with the `Option` `enum`)
 and can encapsulate values within their variants! [^1]
 

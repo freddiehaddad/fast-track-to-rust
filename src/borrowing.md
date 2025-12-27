@@ -6,7 +6,7 @@ been moved, let's now focus on how to _borrow_ a value.
 ## References
 
 Recall from the section on the [string slice `str`] that we said it's usually
-seen in it's _borrowed_ form `&str`. The `&` operator[^1] in the prefix position
+seen in its _borrowed_ form `&str`. The `&` operator[^1] in the prefix position
 represents a borrow. In `find_matching_lines`, `pattern` is _borrowed_.
 
 ```rust,noplayground

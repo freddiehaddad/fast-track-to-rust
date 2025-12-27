@@ -96,7 +96,7 @@ fn read_file(file: File) -> Vec<String> {
    provided `File`. This helps in efficiently reading the file line by line.
 
 1. **`lines()`**: The `lines()` method on `BufReader` returns an iterator over
-   the lines in the file. Because reading from a file can file, each line is
+   the lines in the file. Because reading from a file can fail, each line is
    wrapped in a `Result`, which can be either `Ok` (containing the line) or
    `Err` (containing an error).
 

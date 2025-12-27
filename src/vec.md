@@ -349,7 +349,7 @@ We covered quite a bit in this section:
 
 Let's dive into the concepts of ownership and borrowing.
 
-[^1]: Refer to the [`Vec` source code] see it's full implementation. The `struct`
+[^1]: Refer to the [`Vec` source code] see its full implementation. The `struct`
     definition is on line [397].
 
 [^2]: The [Inferred type] is part of the type system in Rust.

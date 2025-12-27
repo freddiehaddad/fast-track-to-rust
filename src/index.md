@@ -29,7 +29,7 @@ Enough chit chat, let's get started!
     represents the sound of leaves rustling as the program searches through
     data.
 
-[^2]: GNU is an collection of free software commonly used as an operating system.
+[^2]: GNU is a collection of free software commonly used as an operating system.
     The family of operating systems, known as Linux, are built from them.
 
 [^3]: Grep searches one or more input files for lines containing a match to a

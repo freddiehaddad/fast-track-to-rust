@@ -50,7 +50,7 @@ fn main() {
 }
 ```
 
-Run the code to see the error. Then, correct the it by adding the missing
+Run the code to see the error. Then, correct it by adding the missing
 parenthesis `)` and re-run the code.
 
 ## Updating Rustle
