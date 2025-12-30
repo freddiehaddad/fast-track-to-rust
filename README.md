@@ -1,20 +1,23 @@
 # Fast Track to Rust
 
-This repository contains the source code for the Fast Track to Rust online
-course, created by Freddie Haddad. The course explores a wide array of topics in
-the Rust programming language, gradually introducing them through the
-development of a grep-like program.
+This repository houses the official source code for Fast Track to Rust by
+Freddie Haddad. The book provides a comprehensive journey through the Rust
+ecosystem, using the hands-on development of [rustle] -- a custom grep-like
+utility -- to introduce and reinforce core language concepts.
 
-Read the course at **https://freddiehaddad.github.io/fast-track-to-rust/**.
+The book can be read onlne at
+**https://freddiehaddad.github.io/fast-track-to-rust/**.
 
 ## Target Audience
 
-The course is aimed towards experienced software engineers with a background in
-statically typed languages such as C++.
+This book is designed for programmers of all backgrounds looking to master
+Rust. While the core concepts are accessible to anyone with prior coding
+experience, readers familiar with statically typed languages like C++ or Java
+may find certain advanced topics easier to navigate.
 
 ## Building
 
-This course was built using [mdbook].
+Fast Track to Rust was built using [mdbook].
 
 1. Prepare your environment by following the instructions on the [Rust
    installation page].
@@ -34,7 +37,6 @@ For questions or comments, please start a [discussion on GitHub].
 
 [mdbook]: https://github.com/rust-lang/mdBook
 [Rust installation page]: https://www.rust-lang.org/tools/install
-[Build from source using Rust]:
-  https://rust-lang.github.io/mdBook/guide/installation.html#build-from-source-using-rust
-[discussion on GitHub]:
-  https://github.com/freddiehaddad/fast-track-to-rust/discussions
+[Build from source using Rust]: https://rust-lang.github.io/mdBook/guide/installation.html#build-from-source-using-rust
+[discussion on GitHub]: https://github.com/freddiehaddad/fast-track-to-rust/discussions
+[rustle]: https://github.com/freddiehaddad/rustle
